@@ -1,73 +1,84 @@
-/* componentRegister.module.css */
-
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 80vh;
-    color: #fff;
-    font-size: x-large;
-  }
-  
-  .form {
-    width: 100%;
-    max-width: 350px;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgb(3, 240, 248);
-    background: linear-gradient(to right, #ff66b2, #c864d1);
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border: 1px solid white;
-  }
-  
-  .labelTitle {
-    font-size:2.5rem;
-  }
-  .errorLabel {
-    font-size:large;
-    color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  color: #fff;
+  font-size: x-large;
+}
 
-  }.diverror {
-    margin-bottom: 10px;
-    align-items: center;
+.form {
+  width: 100%;
+  max-width: 340px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgb(3, 240, 248);
+  background: linear-gradient(to right, #ff66b2, #c864d1);
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 1px solid white;
+}
+
+.labelTitle {
+  font-size: 2.5rem;
+}
+
+.errorLabel {
+  font-size: large;
+  color: white;
+}
+
+.diverror {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid #04cbfc;
+  margin-bottom: 10px;
+}
+
+.button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background-color: rgb(183, 42, 208);
+  color: #fff;
+  cursor: pointer;
+  font-size: large;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: rgba(223, 5, 239, 0.518);
+}
+
+.bodyContainer {
+  display: flex;
+  justify-content: flex-start;
+ 
+}
+
+@media screen and (max-width: 768px) {
+  .form {
+    width: 90%;
+  } .bodyContainer {
+    margin-left: -80%;
     justify-content: center;
-    align-content: center;
   }
-  
-  .inputContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  .input {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: 2px solid #04cbfc;
-  }
-  
-  .button {
-    width: 100%;
-    padding: 12px;
-    border-radius: 12px;
-    border: none;
-    background-color: rgb(183, 42, 208);
-    color: #fff;
-    cursor: pointer;
-    font-size: large;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
-  }
-  
-  .button:hover {
-    background-color: rgba(223, 5, 239, 0.518);
-  }.bodyContainer {
-    display: flex;
-    justify-content: flex-start;
-   
-  }
-  
+}
