@@ -46,7 +46,7 @@
     margin-bottom: 2%;
     color: black;
   }.menuicono.active + .linkcontainer {
-    width:15rem;
+    width: 22.5rem;
   } 
 
   .navcontainer a {
