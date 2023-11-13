@@ -3,8 +3,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color:azure;
-  color: black;
+  background-color: rgb(198, 220, 220);
+  color: rgb(198, 220, 220);
   padding: 10px 20px;
   height: 60px;
   margin-bottom: 0.5%;
@@ -13,11 +13,12 @@
 
 .navcontainer a {
   text-decoration: none;
-  color: rgb(3, 186, 247);
+  color: red(33, 186, 247);
   font-size: 20px;
   margin-right: 20px;
   font-weight: 900;
   transition: color 0.3s, transform 0.3s;
+  cursor: pointer; /* Agregado */
 }
 
 .navcontainer a:hover {
@@ -30,12 +31,12 @@
   width: 60px;
   height: auto;
   border-radius: 50%;
-  transition: transform 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s; /* Movida la transición aquí */
 }
 
 .navcontainer img:hover {
-  box-shadow: 0 0 20px rgb(3, 186, 247); /* Sombra roja al hacer hover */
-  transition: box-shadow 0.3s; /* Transición para la sombra */
+  box-shadow: 0 0 20px rgb(247, 3, 3); /* Cambiado a sombra roja */
+  /* Transición eliminada de aquí */
 }
 
 /* Estilos para pantallas pequeñas (responsive) */
@@ -43,6 +44,7 @@
   .navcontainer {
     justify-content: space-between;
     margin-bottom: 2%;
+    color: black;
   }
 
   .navcontainer a {
@@ -60,12 +62,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: aqua;
+    background-color: rgb(198, 220, 220);;
     position: absolute;
     top: 60px;
     left: 0;
     right: 0;
     z-index: 1;
+    width: 24.7rem;
+    margin-left: 2%;
+    border-radius: 20px;
   }
 
   .menuicono.active + .linkcontainer a {
