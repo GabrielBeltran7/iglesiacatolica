@@ -5,7 +5,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 80vh;
+    height: 100vh;
     color: #fff;
     font-size: x-large;
   }
@@ -23,7 +23,7 @@
   }
   
   .labelTitle {
-    font-size:3rem;
+    font-size:2rem;
   }
   .errorLabel {
     font-size:large;

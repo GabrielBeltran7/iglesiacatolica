@@ -20,7 +20,7 @@ const ComponentRegister = () => {
   };
 
   const isValidEmail = (email) => {
-    // Expresión regular para validar un correo electrónico
+    
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
@@ -30,19 +30,19 @@ const ComponentRegister = () => {
 
     if (!isValidEmail(input.email)) {
       setError("Ingresa un correo válido");
-      // Se puede ajustar el tiempo según tus necesidades
+     
       setTimeout(() => {
         setError("");
-      }, 4000); // Esto ocultará el mensaje después de 3 segundos
+      }, 4000); 
     } else {
       setError("");
       setInput({
         displayName: "",
         email: "",
-        password: "", // Asumí que también quieres limpiar el campo de contraseña
+        password: "", 
         phoneNumber: "",
       });
-      // Puedes agregar aquí alguna lógica adicional para un registro exitoso
+
       console.log("Registro exitoso");
     }
   };
