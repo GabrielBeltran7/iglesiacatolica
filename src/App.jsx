@@ -19,6 +19,7 @@ function App() {
           <Route path='/passwordrecover' element={<RecoverPassword />}/>
         </Routes>
         <Footer/>
+        
       </>
     </Router>
   );

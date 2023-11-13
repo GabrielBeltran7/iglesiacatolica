@@ -31,15 +31,15 @@
   width: 60px;
   height: auto;
   border-radius: 50%;
-  transition: transform 0.3s, box-shadow 0.3s; /* Movida la transición aquí */
+  transition: transform 0.3s, box-shadow 0.3s; 
 }
 
 .navcontainer img:hover {
-  box-shadow: 0 0 20px rgb(247, 3, 3); /* Cambiado a sombra roja */
-  /* Transición eliminada de aquí */
+  box-shadow: 0 0 20px rgb(210, 3, 247); 
+
 }
 
-/* Estilos para pantallas pequeñas (responsive) */
+
 @media screen and (max-width: 768px) {
   .navcontainer {
     justify-content: space-between;
@@ -67,10 +67,6 @@
     background-color: rgb(198, 220, 220);;
     position: absolute;
     top: 60px;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    
     margin-left: 2%;
     border-radius: 20px;
   }
