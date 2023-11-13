@@ -18,7 +18,7 @@
   margin-right: 20px;
   font-weight: 900;
   transition: color 0.3s, transform 0.3s;
-  cursor: pointer; /* Agregado */
+  cursor: pointer; 
 }
 
 .navcontainer a:hover {
@@ -45,7 +45,9 @@
     justify-content: space-between;
     margin-bottom: 2%;
     color: black;
-  }
+  }.menuicono.active + .linkcontainer {
+    width: 22.5rem;
+  } 
 
   .navcontainer a {
     display: none;
@@ -68,7 +70,7 @@
     left: 0;
     right: 0;
     z-index: 1;
-    width: 22.5rem;
+    
     margin-left: 2%;
     border-radius: 20px;
   }
