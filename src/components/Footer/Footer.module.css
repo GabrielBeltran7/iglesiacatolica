@@ -1,0 +1,25 @@
+/* Footer.module.css */
+
+.containerprincipal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  padding: 20px;
+  border-radius: 15px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+  
+  .containerprincipal a {
+    font-size: 30px; 
+    color: #fff; 
+    text-decoration: none;
+    margin: 0 10px; 
+  }
+  
+  .containerprincipal a:hover {
+   color: rgb(33, 174, 217); /* Color de acento dorado al pasar el cursor sobre los íconos */
+  }

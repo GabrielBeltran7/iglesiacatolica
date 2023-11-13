@@ -4,17 +4,21 @@ import Home from './views/home/home.jsx';
 import Login from './views/login/login.jsx';
 import Register from './views/register/register.jsx';
 import RecoverPassword from './views/recoverPassword/recoverPassword.jsx';
+import Navbar from './components/Navbar/Navbar.jsx';
+import Footer from './components/Footer/Footer.jsx';
 
 function App() {
   return (
     <Router>
       <>
+      <Navbar/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />} />
           <Route path='/passwordrecover' element={<RecoverPassword />}/>
         </Routes>
+        <Footer/>
       </>
     </Router>
   );
