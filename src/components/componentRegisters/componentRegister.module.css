@@ -6,6 +6,7 @@
   height: 80vh;
   color: #fff;
   font-size: x-large;
+  margin-bottom: 20px;
 }
 
 .form {
@@ -63,7 +64,6 @@
   font-size: large;
   transition: background-color 0.3s ease;
 }
-
 .button:hover {
   background-color: rgba(223, 5, 239, 0.518);
 }
@@ -71,7 +71,6 @@
 .bodyContainer {
   display: flex;
   justify-content: flex-start;
- 
 }
 
 @media screen and (max-width: 768px) {
