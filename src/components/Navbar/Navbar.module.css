@@ -3,8 +3,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(33, 174, 217);
-  color: white;
+  background-color:azure;
+  color: black;
   padding: 10px 20px;
   height: 60px;
   margin-bottom: 0.5%;
@@ -13,7 +13,7 @@
 
 .navcontainer a {
   text-decoration: none;
-  color: white;
+  color: rgb(3, 186, 247);
   font-size: 20px;
   margin-right: 20px;
   font-weight: 900;
@@ -34,7 +34,7 @@
 }
 
 .navcontainer img:hover {
-  box-shadow: 0 0 20px rgba(247, 3, 3, 0.932); /* Sombra roja al hacer hover */
+  box-shadow: 0 0 20px rgb(3, 186, 247); /* Sombra roja al hacer hover */
   transition: box-shadow 0.3s; /* Transición para la sombra */
 }
 
