@@ -1,4 +1,4 @@
-import './App.css';
+import style from './App.css';
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import Home from './views/home/home.jsx';
 import Login from './views/login/login.jsx';
@@ -11,7 +11,10 @@ function App() {
   return (
     <Router>
       <>
+      <div className={style.nanvar}>
       <Navbar/>
+      </div>
+    
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path='/login' element={<Login />}/>
