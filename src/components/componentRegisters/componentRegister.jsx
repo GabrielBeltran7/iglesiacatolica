@@ -81,7 +81,7 @@ const ComponentRegister = () => {
         <div className={style.inputContainer}>
           <input
             className={style.input}
-            name="password" // Cambié el nombre del campo
+            name="password" 
             type="password"
             placeholder="Ingresa tu contraseña"
             onChange={handleChangeInput}
