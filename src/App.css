@@ -1,11 +1,16 @@
+.nanvar{
+    align-items: center;
+    justify-content: center;
+  }
+
 
 /* App.css */
 
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
-  background-color: #f0f0f0;
-  color: #333;
+  background-color:rgba(192, 100, 209, 0.835);
+ 
 }
 
 .container {
@@ -63,4 +68,3 @@ body {
     margin: 10px 0;
   }
 }
-
