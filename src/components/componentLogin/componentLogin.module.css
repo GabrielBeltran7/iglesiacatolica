@@ -104,16 +104,12 @@
 }
 
 /* Media queries para ajustar estilos en pantallas más pequeñas */
-@media screen and (max-width: 600px)
-      
-       
-       
-       {
-  .form {
-    width: 90%;
-  }
 
-  .bodyContainer {
+
+@media screen and (max-width: 768px) {
+  .form {
+    width: 100%;
+  } .bodyContainer {
     margin-left: -80%;
     justify-content: center;
   }
