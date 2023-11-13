@@ -26,6 +26,7 @@ const ComponentLogin = () => {
         <BackButton />
       </div>
       <div className={styles.container}>
+      <label className={styles.labelTitle}>Iniciar Sesion</label>
         <form className={styles.form}>
           <div className={styles.inputContainer}>
             <FaEnvelope className={styles.icon} />
