@@ -34,6 +34,7 @@
   object-fit: cover; /* Ajusta la imagen para cubrir completamente el contenedor */
   display: block;
   margin: 0 auto;
+  border-radius: 20px;
 }
 
 @media screen and (max-width: 600px) {
