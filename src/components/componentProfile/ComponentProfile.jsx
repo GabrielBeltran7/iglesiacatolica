@@ -36,7 +36,7 @@ const ComponentProfile = () => {
 
   return (
     <div className={style.container}>
-      <h2 className={style.labelTitle}>Perfil</h2>
+      <h2 className={style.labelTitle}>Mis Datos</h2>
       <form className={style.form} onSubmit={handleFormSubmit}>
         <div className={style.div}>
           <div className={style.inputContainer}>
