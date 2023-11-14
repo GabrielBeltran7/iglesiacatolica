@@ -10,8 +10,16 @@ import style from "./componentRegister.module.css";
 import BackButton from "../backButton/backButton";
 import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig.js";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const componentRegister = () => {
+
+  const navigate = useNavigate();
+
+  const navigateProfile = () => {
+    navigate("/profile");
+  };
+
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -76,6 +84,7 @@ const componentRegister = () => {
           timerProgressBar: true,
           timer: 4500,
         });
+        navigateProfile()
       } catch (error) {
        
         if (error.code === 'auth/email-already-in-use') {

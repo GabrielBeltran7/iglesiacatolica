@@ -19,7 +19,7 @@ const ComponentLogin = () => {
   const navigateRegister = () => {
     navigate("/register");
   };
-
+ 
   return (
     <>
       <div className={styles.bodyContainer}>

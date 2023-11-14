@@ -6,6 +6,7 @@ import Register from './views/register/register.jsx';
 import RecoverPassword from './views/recoverPassword/recoverPassword.jsx';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Footer from './components/Footer/Footer.jsx';
+import ComponentProfile from './components/componentProfile/ComponentProfile.jsx';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />} />
           <Route path='/passwordrecover' element={<RecoverPassword />}/>
+          <Route path='/profile' element={<ComponentProfile />}/>
         </Routes>
         <Footer/>
         
