@@ -10,10 +10,13 @@ const componentRecoverPassword = () => {
       <div className={styles.buttonBack}>
         <BackButton />
       </div>
-
+      
       <div className={styles.container}>
+      <label className={styles.labelTitle}>Recuperar Contraseña</label>
         <form className={styles.form}>
+        
           <div className={styles.inputContainer}>
+          
             <FaEnvelope className={styles.icon} />
             <input
               placeholder="Digita tu correo"
