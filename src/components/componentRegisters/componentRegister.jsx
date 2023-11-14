@@ -81,7 +81,7 @@ const componentRegister = () => {
           icon: 'success',
           title: 'Usuario Registrado con Éxito.',
           timerProgressBar: true,
-          timer: 3500,
+          timer: 4500,
         });
       } catch (error) {
         // Manejo específico para el error de correo electrónico ya registrado
@@ -91,7 +91,7 @@ const componentRegister = () => {
             title: 'Correo ya registrado',
             text: 'Debe iniciar sesión.',
             confirmButtonColor: '#d33',
-            timer: 3500,
+            timer: 5000,
           });
         } else {
           // Otros errores
@@ -101,7 +101,7 @@ const componentRegister = () => {
             title: 'Error al registrar el usuario',
             text: 'Vuelva a intentarlo.',
             confirmButtonColor: '#d33',
-            timer: 3500,
+            timer: 5000,
           });
         }
       }
