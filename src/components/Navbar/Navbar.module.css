@@ -22,7 +22,7 @@
 }
 
 .navcontainer a:hover {
-  color: rgba(192, 100, 209, 0.835);
+  color: rgba(211, 4, 243, 0.835);
   transform: scale(1.1);
 }
 
@@ -35,7 +35,7 @@
 }
 
 .navcontainer img:hover {
-  box-shadow: 0 0 20px rgb(210, 3, 247); 
+  box-shadow: 0 0 30px rgb(247, 3, 243); 
 
 }
 

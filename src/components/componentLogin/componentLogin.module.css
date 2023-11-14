@@ -42,7 +42,7 @@
   max-width: 340px;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 20px rgb(3, 240, 248);
+  box-shadow: 0 0 20px rgb(1, 2, 2);
   background: linear-gradient(to right, #ff66b2, #c864d1);
   margin-top: 20px;
   margin-bottom: 20px;
@@ -102,10 +102,6 @@
 .button:hover {
   background-color: rgba(223, 5, 239, 0.518);
 }
-
-/* Media queries para ajustar estilos en pantallas más pequeñas */
-
-
 @media screen and (max-width: 600px) {
   .form {
     width: 85%;
