@@ -15,6 +15,7 @@ const ComponentHome = () => {
   };
   return (
     <div className={style.container}>
+      
       <div className={style.containerbutton}>
       <button className={style.button} onClick={navigateLogin}>
         Iniciar Sesión

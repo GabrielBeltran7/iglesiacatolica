@@ -4,13 +4,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content:  flex-start;
   height: 100vh;
 }
 
 .containerbutton {
   display: flex;
-  flex-wrap: wrap; /* Agrega un wrap para los botones en pantallas pequeñas */
+  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -47,6 +47,6 @@
   .carouselContainer {
     max-width: 500px; /* Ajusta el ancho máximo según tus necesidades */
   }.label{
-    font-size: 30px;
+    font-size: 2rem;
   }
 }

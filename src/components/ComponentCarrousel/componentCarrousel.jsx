@@ -2,13 +2,7 @@ import React from "react";
 import { Carousel } from "antd";
 import style from "./componentCarrousel.module.css";
 
-const contentStyle = {
-  height: "160px",
-  color: "#fff",
-  lineHeight: "160px",
-  textAlign: "center",
-  background: "#364d79",
-};
+
 const componentCarrousel = () => (
   <Carousel effect="fade" autoplay className={style.carrousel}>
     <div className={style.image}>
