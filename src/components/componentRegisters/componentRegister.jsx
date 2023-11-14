@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import Swal from "sweetalert2"
+import React, { useState } from "react";
 import style from "./componentRegister.module.css";
 import BackButton from "../backButton/backButton";
+import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig.js";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
-const ComponentRegister = () => {
+const componentRegister = () => {
   const [input, setInput] = useState({
-    displayName: "",
     email: "",
-    phoneNumber: "",
     password: "",
+    confipassword: ""
   });
-
   const [error, setError] = useState("");
 
   const handleChangeInput = (event) => {
@@ -24,27 +25,95 @@ const ComponentRegister = () => {
     return emailRegex.test(email);
   };
 
-  const onSubmitInputs = (event) => {
-    event.preventDefault();
+  const isValidPassword = (password) => {
+    const passwordRegex = /.{6,}/;
+    return passwordRegex.test(password);
+  };
 
+  const isValidConfipassword = () => {
+    return input.password === input.confipassword;
+  };
+
+  const isEmailAlreadyRegistered = async (email) => {
+    const authForCheck = auth; 
+    try {
+      await createUserWithEmailAndPassword(authForCheck, email, "dummyPassword");
+      return false; 
+    } catch (error) {
+     
+      return error.code === "auth/email-already-in-use";
+    }
+  };
+
+
+  const onSubmitInputs = async (event) => {
+    event.preventDefault();
+  
     if (!isValidEmail(input.email)) {
       setError("Ingresa un correo válido");
-
+  
+      setTimeout(() => {
+        setError("");
+      }, 4000);
+    } else if (!isValidPassword(input.password)) {
+      setError("Ingrese una contraseña de 6 caracteres");
+  
+      setTimeout(() => {
+        setError("");
+      }, 4000);
+    } else if (!isValidConfipassword()) {
+      setError("Las contraseñas no coinciden");
+  
       setTimeout(() => {
         setError("");
       }, 4000);
     } else {
+      try {
+        // Intenta crear el usuario
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          input.email,
+          input.password
+        );
+      
+        // Usuario registrado con éxito
+        Swal.fire({
+          icon: 'success',
+          title: 'Usuario Registrado con Éxito.',
+          timerProgressBar: true,
+          timer: 3500,
+        });
+      } catch (error) {
+        // Manejo específico para el error de correo electrónico ya registrado
+        if (error.code === 'auth/email-already-in-use') {
+          Swal.fire({
+            icon: 'error',
+            title: 'Correo ya registrado',
+            text: 'Debe iniciar sesión.',
+            confirmButtonColor: '#d33',
+            timer: 3500,
+          });
+        } else {
+          // Otros errores
+          console.error("Error al registrar el usuario:", error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error al registrar el usuario',
+            text: 'Vuelva a intentarlo.',
+            confirmButtonColor: '#d33',
+            timer: 3500,
+          });
+        }
+      }
       setError("");
       setInput({
-        displayName: "",
         email: "",
         password: "",
-        phoneNumber: "",
+        confipassword: ""
       });
-
-      console.log("Registro exitoso");
     }
   };
+  
 
   return (
     <>
@@ -54,18 +123,6 @@ const ComponentRegister = () => {
       <div className={style.container}>
         <label className={style.labelTitle}>Regístrate</label>
         <form className={style.form}>
-          <div className={style.inputContainer}>
-            <input
-              className={style.input}
-              name="displayName"
-              type="text"
-              placeholder="Nombre Completo"
-              onChange={handleChangeInput}
-              value={input.displayName}
-              required
-            />
-          </div>
-
           <div className={style.inputContainer}>
             <input
               className={style.input}
@@ -81,25 +138,25 @@ const ComponentRegister = () => {
               className={style.input}
               name="password"
               type="password"
-              placeholder="Ingresa tu contraseña"
+              placeholder="Ingresa tu Contraseña"
               onChange={handleChangeInput}
               value={input.password}
               required
             />
           </div>
-          <div className={style.diverror}>
-            {error ? <label className={style.errorLabel}>{error}</label> : null}
-          </div>
-
           <div className={style.inputContainer}>
             <input
               className={style.input}
-              name="phoneNumber"
-              type="Number"
-              placeholder="Celular"
+              name="confipassword"
+              type="password"
+              placeholder="Confirma tu Contraseña"
               onChange={handleChangeInput}
-              value={input.phoneNumber}
+              value={input.confipassword}
+              required
             />
+          </div>
+          <div className={style.diverror}>
+            {error && <label className={style.errorLabel}>{error}</label>}
           </div>
           <div className={style.inputContainer}>
             <button className={style.button} onClick={onSubmitInputs}>
@@ -112,4 +169,195 @@ const ComponentRegister = () => {
   );
 };
 
-export default ComponentRegister;
+export default componentRegister;
+
+
+
+
+
+
+
+
+// import Swal from "sweetalert2"
+// import React, { useState } from "react";
+// import style from "./componentRegister.module.css";
+// import BackButton from "../backButton/backButton";
+// import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig.js";
+// import { createUserWithEmailAndPassword } from "firebase/auth";
+
+// const componentRegister = () => {
+//   const [input, setInput] = useState({
+//     email: "",
+//     password: "",
+//     confipassword: ""
+//   });
+//   const [error, setError] = useState("");
+
+//   const handleChangeInput = (event) => {
+//     setInput({
+//       ...input,
+//       [event.target.name]: event.target.value,
+//     });
+//   };
+
+//   const isValidEmail = (email) => {
+//     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//     return emailRegex.test(email);
+//   };
+
+//   const isValidPassword = (password) => {
+//     const passwordRegex = /.{6,}/;
+//     return passwordRegex.test(password);
+//   };
+
+//   const isValidConfipassword = () => {
+//     return input.password === input.confipassword;
+//   };
+
+//   const isEmailAlreadyRegistered = async (email) => {
+//     const authForCheck = auth; 
+//     try {
+//       await createUserWithEmailAndPassword(authForCheck, email, "dummyPassword");
+//       return false; 
+//     } catch (error) {
+     
+//       return error.code === "auth/email-already-in-use";
+//     }
+//   };
+
+
+//   const onSubmitInputs = async (event) => {
+//     event.preventDefault();
+  
+//     if (!isValidEmail(input.email)) {
+//       setError("Ingresa un correo válido");
+  
+//       setTimeout(() => {
+//         setError("");
+//       }, 4000);
+//     } else if (!isValidPassword(input.password)) {
+//       setError("Ingrese una contraseña de 6 caracteres");
+  
+//       setTimeout(() => {
+//         setError("");
+//       }, 4000);
+//     } else if (!isValidConfipassword()) {
+//       setError("Las contraseñas no coinciden");
+  
+//       setTimeout(() => {
+//         setError("");
+//       }, 4000);
+//     } else {
+//       try {
+//         // Verificar si el correo electrónico ya está en uso
+//         const isEmailRegistered = await isEmailAlreadyRegistered(input.email.toLowerCase());
+//        console.log("2222222222222222", isEmailRegistered)
+//         if (isEmailRegistered) {
+//           Swal.fire({
+//             icon: 'error',
+//             title: 'Correo ya registrado',
+//             text: 'Debe iniciar sesión.',
+//             confirmButtonColor: '#d33',
+//             timer: 3500,
+//           });
+//           return;
+//         }
+  
+//         // El correo electrónico no está registrado, entonces intenta crear el usuario
+
+
+//        else if (!isEmailRegistered) {
+//           const userCredential = await createUserWithEmailAndPassword(
+//             auth,
+//             input.email,
+//             input.password
+//           );
+//            Swal.fire({
+//             icon: "success",
+//             title: "Usuario Registrado con Éxito.",
+//             timerProgressBar: true,
+//             timer: 3500,
+//           });
+         
+//         }
+        
+//         return;
+
+//       } catch (error) {
+//         Swal.fire({
+//           icon: 'error',
+//           title: 'Error al registrar el usuario',
+//           text: 'Vuelva a intentarlo.',
+//           confirmButtonColor: '#d33',
+//           timer: 3500,
+//         });
+//       }
+  
+//       setError("");
+//       setInput({
+//         email: "",
+//         password: "",
+//         confipassword: ""
+//       });
+//     }
+//   };
+  
+
+//   return (
+//     <>
+//       <div className={style.bodyContainer}>
+//         <BackButton />
+//       </div>
+//       <div className={style.container}>
+//         <label className={style.labelTitle}>Regístrate</label>
+//         <form className={style.form}>
+//           <div className={style.inputContainer}>
+//             <input
+//               className={style.input}
+//               name="email"
+//               type="email"
+//               placeholder="Correo"
+//               onChange={handleChangeInput}
+//               value={input.email}
+//             />
+//           </div>
+//           <div className={style.inputContainer}>
+//             <input
+//               className={style.input}
+//               name="password"
+//               type="password"
+//               placeholder="Ingresa tu Contraseña"
+//               onChange={handleChangeInput}
+//               value={input.password}
+//               required
+//             />
+//           </div>
+//           <div className={style.inputContainer}>
+//             <input
+//               className={style.input}
+//               name="confipassword"
+//               type="password"
+//               placeholder="Confirma tu Contraseña"
+//               onChange={handleChangeInput}
+//               value={input.confipassword}
+//               required
+//             />
+//           </div>
+//           <div className={style.diverror}>
+//             {error && <label className={style.errorLabel}>{error}</label>}
+//           </div>
+//           <div className={style.inputContainer}>
+//             <button className={style.button} onClick={onSubmitInputs}>
+//               Registrar
+//             </button>
+//           </div>
+//         </form>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default componentRegister;
+
+
+
