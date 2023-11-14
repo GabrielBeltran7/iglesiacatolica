@@ -1,0 +1,52 @@
+/* componentHome.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.containerbutton {
+  display: flex;
+  flex-wrap: wrap; /* Agrega un wrap para los botones en pantallas pequeñas */
+  justify-content: center;
+}
+
+.label {
+  color: white;
+  font-size: 3rem;
+  margin: 30px;
+}
+
+.button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background-color: rgb(183, 42, 208);
+  color: #fff;
+  cursor: pointer;
+  font-size: large;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.button:hover {
+  background-color: #2980b9;
+}
+
+.carouselContainer {
+  width: 100%; /* Ancho del 100% para que se ajuste a la pantalla */
+  max-width: 800px; /* Ajusta el ancho máximo según tus necesidades */
+  margin: 20px auto; /* Centra el contenedor y agrega espacio superior e inferior */
+}
+
+@media screen and (max-width: 740px) {
+  .carouselContainer {
+    max-width: 500px; /* Ajusta el ancho máximo según tus necesidades */
+  }.label{
+    font-size: 30px;
+  }
+}

@@ -65,7 +65,7 @@
   transition: background-color 0.3s ease;
 }
 .button:hover {
-  background-color: rgba(223, 5, 239, 0.518);
+  background-color: #2980b9;
 }
 
 .bodyContainer {
