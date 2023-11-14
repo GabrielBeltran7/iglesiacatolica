@@ -29,7 +29,7 @@ const Navbar = () => {
           Inicio
         </Link>
         <Link to="/login" onClick={closeMenu}>
-          Iniciar Sesion
+          Inicia Sesion
         </Link>
        
         <Link to="/register" onClick={closeMenu}>
