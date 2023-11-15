@@ -1,16 +1,15 @@
-
 import React, { useState, useEffect } from "react";
 import style from "./ComponentProfile.module.css";
 import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig";
 import { useDispatch } from "react-redux";
-import  { postProfile } from "../../Redux/Actions"
+import { postProfile } from "../../Redux/Actions";
 import { onAuthStateChanged } from "firebase/auth";
 
 const ComponentProfile = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const dateUser = auth.currentUser;
-  const userId = dateUser?.uid ??"";
-  const userEmail = dateUser?.email??"";
+  const userId = dateUser?.uid ?? "";
+  const userEmail = dateUser?.email ?? "";
   const [formData, setFormData] = useState({
     nombre: "",
     apellidos: "",
@@ -20,9 +19,9 @@ const ComponentProfile = () => {
     posicion: "",
     disponibilidad: "",
     urquilla: "",
-    email:userEmail,
-    userId:userId,
-    admin:true
+    email: userEmail,
+    userId: userId,
+    admin: true,
   });
 
   const handleInputChange = (event) => {
@@ -34,8 +33,8 @@ const ComponentProfile = () => {
 
   const handleSaveSubmit = (e) => {
     e.preventDefault();
-     dispatch(postProfile(formData))
-     setFormData({
+    dispatch(postProfile(formData));
+    setFormData({
       nombre: "",
       apellidos: "",
       fechaNacimiento: "",
@@ -44,7 +43,7 @@ const ComponentProfile = () => {
       posicion: "",
       disponibilidad: "",
       urquilla: "",
-     })
+    });
   };
 
   useEffect(() => {
@@ -57,8 +56,7 @@ const ComponentProfile = () => {
     });
   }, []);
 
-
-useEffect(() => {
+  useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // El usuario está autenticado
@@ -68,7 +66,7 @@ useEffect(() => {
         console.log("Usuario no autenticado");
       }
     });
-  }, [])
+  }, []);
   return (
     <div className={style.container}>
       <h2 className={style.labelTitle}>Mis Datos</h2>
@@ -83,6 +81,7 @@ useEffect(() => {
                 value={formData.nombre}
                 onChange={handleInputChange}
                 className={style.inputdiv}
+                required
               />
             </label>
           </div>
@@ -95,42 +94,45 @@ useEffect(() => {
                 value={formData.apellidos}
                 onChange={handleInputChange}
                 className={style.inputdiv}
+                required
               />
             </label>
           </div>
         </div>
 
-
-
         <div className={style.divdate}>
+          <div className={style.inputContainer}>
+            <label>
+              {" "}
+              Fecha de Nacimiento
+              <input
+                placeholder="Fecha de nacimiento"
+                type="date"
+                name="fechaNacimiento"
+                value={formData.fechaNacimiento}
+                onChange={handleInputChange}
+                className={style.inputdate}
+                required
+              />
+            </label>
+          </div>
+          <div className={style.inputContainer}>
+            <label>
+              {" "}
+              Fecha de Afiliacion
+              <input
+                placeholder="Fecha de afiliación"
+                type="date"
+                name="fechaAfiliacion"
+                value={formData.fechaAfiliacion}
+                onChange={handleInputChange}
+                className={style.inputdate}
+              />
+            </label>
+          </div>
+        </div>
 
         <div className={style.inputContainer}>
-          <label> Fecha de Nacimiento
-            <input
-              placeholder="Fecha de nacimiento"
-              type="date"
-              name="fechaNacimiento"
-              value={formData.fechaNacimiento}
-              onChange={handleInputChange}
-              className={style.inputdate}
-            />
-          </label>
-        </div>
-        <div className={style.inputContainer}>
-          <label> Fecha de Afiliacion
-            <input
-              placeholder="Fecha de afiliación"
-              type="date"
-              name="fechaAfiliacion"
-              value={formData.fechaAfiliacion}
-              onChange={handleInputChange}
-              className={style.inputdate}
-            />
-          </label>
-        </div>
-        </div>
-
-         <div className={style.inputContainer}>
           <label>
             <input
               placeholder="Estatura en metros"
@@ -139,6 +141,7 @@ useEffect(() => {
               value={formData.estatura}
               onChange={handleInputChange}
               className={style.input}
+              required
             />
           </label>
         </div>
@@ -150,6 +153,7 @@ useEffect(() => {
               value={formData.posicion}
               onChange={handleInputChange}
               className={style.input}
+              required
             >
               <option value="">Seleccione...</option>
               <option value="Derecha">Derecha</option>
@@ -165,6 +169,7 @@ useEffect(() => {
               value={formData.disponibilidad}
               onChange={handleInputChange}
               className={style.input}
+              required
             >
               <option value="">Seleccione...</option>
               <option value="Semana Mayor">Semana Mayor</option>
@@ -181,6 +186,7 @@ useEffect(() => {
               value={formData.urquilla}
               onChange={handleInputChange}
               className={style.input}
+              required
             >
               <option value="">Seleccione...</option>
               <option value="Si">Si</option>
@@ -189,21 +195,18 @@ useEffect(() => {
           </label>
         </div>
 
-
-         <div className={style.buttoncontainer}>
-        <div className={style.inputContainer}>
-          <button type="submit"   className={style.button}>
-            Guardar
-          </button>
+        <div className={style.buttoncontainer}>
+          <div className={style.inputContainer}>
+            <button type="submit" className={style.button}>
+              Guardar
+            </button>
+          </div>
+          <div className={style.inputContainer}>
+            <button type="submit" className={style.button}>
+              Actualizar
+            </button>
+          </div>
         </div>
-        <div className={style.inputContainer}>
-          <button type="submit" className={style.button}>
-            Actualizar
-          </button>
-        </div>
-        </div> 
-
-
       </form>
     </div>
   );
@@ -290,8 +293,6 @@ export default ComponentProfile;
 //             </label>
 //           </div>
 //         </div>
-
-
 
 //         <div className={style.divdate}>
 
@@ -380,7 +381,6 @@ export default ComponentProfile;
 //           </label>
 //         </div>
 
-
 //          <div className={style.buttoncontainer}>
 //         <div className={style.inputContainer}>
 //           <button type="submit"  onSubmit={handleSaveSubmit} className={style.button}>
@@ -392,8 +392,7 @@ export default ComponentProfile;
 //             Actualizar
 //           </button>
 //         </div>
-//         </div> 
-
+//         </div>
 
 //       </form>
 //     </div>
