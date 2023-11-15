@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from "react";
 import style from "./ComponentProfile.module.css";
 import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig";
@@ -38,14 +40,18 @@ const ComponentProfile = () => {
       nombre: "",
       apellidos: "",
       fechaNacimiento: "",
-      fechaAfiliacion: "",
       estatura: "",
       posicion: "",
       disponibilidad: "",
       urquilla: "",
+      email: userEmail,
+      userId: userId,
+      fechaAfiliacion: formattedDate,
     });
   };
 
+  const today = new Date();
+  const formattedDate = today.toISOString().split("T")[0];
 
   useEffect(()=>{
     setTimeout(() => {
@@ -53,22 +59,10 @@ const ComponentProfile = () => {
         ...formData,
         email: userEmail,
         userId: userId,
+        fechaAfiliacion: formattedDate,
       });
     }, 1500);
-  })
-
-
-  useEffect(() => {
-    // Establecer la fecha actual al cargar la página
-    const today = new Date();
-    const formattedDate = today.toISOString().split("T")[0];
-    setFormData({
-      ...formData,
-      fechaAfiliacion: formattedDate,
-    });
-  }, []);
-
-
+  },[userId])
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -232,6 +226,7 @@ const ComponentProfile = () => {
 
 export default ComponentProfile;
 
+
 // import React, { useState, useEffect } from "react";
 // import style from "./ComponentProfile.module.css";
 // import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig";
@@ -272,23 +267,29 @@ export default ComponentProfile;
 //       nombre: "",
 //       apellidos: "",
 //       fechaNacimiento: "",
-//       fechaAfiliacion: "",
 //       estatura: "",
 //       posicion: "",
 //       disponibilidad: "",
 //       urquilla: "",
+//       email: userEmail,
+//       userId: userId,
+//       fechaAfiliacion: formattedDate,
 //     });
 //   };
 
-//   useEffect(() => {
-//     // Establecer la fecha actual al cargar la página
-//     const today = new Date();
-//     const formattedDate = today.toISOString().split("T")[0];
-//     setFormData({
-//       ...formData,
-//       fechaAfiliacion: formattedDate,
-//     });
-//   }, []);
+//   const today = new Date();
+//   const formattedDate = today.toISOString().split("T")[0];
+
+//   useEffect(()=>{
+//     setTimeout(() => {
+//       setFormData({
+//         ...formData,
+//         email: userEmail,
+//         userId: userId,
+//         fechaAfiliacion: formattedDate,
+//       });
+//     }, 1500);
+//   },[userId])
 
 //   useEffect(() => {
 //     onAuthStateChanged(auth, (user) => {
@@ -299,7 +300,11 @@ export default ComponentProfile;
 //         // El usuario no está autenticado
 //         console.log("Usuario no autenticado");
 //       }
+     
 //     });
+ 
+    
+   
 //   }, []);
 //   return (
 //     <div className={style.container}>
