@@ -46,6 +46,18 @@ const ComponentProfile = () => {
     });
   };
 
+
+  useEffect(()=>{
+    setTimeout(() => {
+      setFormData({
+        ...formData,
+        email: userEmail,
+        userId: userId,
+      });
+    }, 1500);
+  })
+
+
   useEffect(() => {
     // Establecer la fecha actual al cargar la página
     const today = new Date();
@@ -56,6 +68,8 @@ const ComponentProfile = () => {
     });
   }, []);
 
+
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -65,7 +79,11 @@ const ComponentProfile = () => {
         // El usuario no está autenticado
         console.log("Usuario no autenticado");
       }
+     
     });
+ 
+    
+   
   }, []);
   return (
     <div className={style.container}>
@@ -219,13 +237,13 @@ export default ComponentProfile;
 // import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig";
 // import { useDispatch } from "react-redux";
 // import { postProfile } from "../../Redux/Actions";
+// import { onAuthStateChanged } from "firebase/auth";
 
 // const ComponentProfile = () => {
-//   const dispatch = useDispatch()
+//   const dispatch = useDispatch();
 //   const dateUser = auth.currentUser;
-//   const userId = dateUser?.uid ??"";
-//   const userEmail = dateUser?.email ??"";
-
+//   const userId = dateUser?.uid ?? "";
+//   const userEmail = dateUser?.email ?? "";
 //   const [formData, setFormData] = useState({
 //     nombre: "",
 //     apellidos: "",
@@ -235,9 +253,9 @@ export default ComponentProfile;
 //     posicion: "",
 //     disponibilidad: "",
 //     urquilla: "",
-//     email:userEmail,
-//     userId:userId,
-//     admin:true
+//     email: userEmail,
+//     userId: userId,
+//     admin: true,
 //   });
 
 //   const handleInputChange = (event) => {
@@ -249,8 +267,17 @@ export default ComponentProfile;
 
 //   const handleSaveSubmit = (e) => {
 //     e.preventDefault();
-//     dispatch(postProfile(formData))
-//     console.log("55555555555555", formData)
+//     dispatch(postProfile(formData));
+//     setFormData({
+//       nombre: "",
+//       apellidos: "",
+//       fechaNacimiento: "",
+//       fechaAfiliacion: "",
+//       estatura: "",
+//       posicion: "",
+//       disponibilidad: "",
+//       urquilla: "",
+//     });
 //   };
 
 //   useEffect(() => {
@@ -263,10 +290,21 @@ export default ComponentProfile;
 //     });
 //   }, []);
 
+//   useEffect(() => {
+//     onAuthStateChanged(auth, (user) => {
+//       if (user) {
+//         // El usuario está autenticado
+//         console.log("Usuario autenticado:", user);
+//       } else {
+//         // El usuario no está autenticado
+//         console.log("Usuario no autenticado");
+//       }
+//     });
+//   }, []);
 //   return (
 //     <div className={style.container}>
 //       <h2 className={style.labelTitle}>Mis Datos</h2>
-//       <form className={style.form} >
+//       <form className={style.form} onSubmit={handleSaveSubmit}>
 //         <div className={style.div}>
 //           <div className={style.inputContainer}>
 //             <label>
@@ -277,6 +315,7 @@ export default ComponentProfile;
 //                 value={formData.nombre}
 //                 onChange={handleInputChange}
 //                 className={style.inputdiv}
+//                 required
 //               />
 //             </label>
 //           </div>
@@ -289,40 +328,45 @@ export default ComponentProfile;
 //                 value={formData.apellidos}
 //                 onChange={handleInputChange}
 //                 className={style.inputdiv}
+//                 required
 //               />
 //             </label>
 //           </div>
 //         </div>
 
 //         <div className={style.divdate}>
+//           <div className={style.inputContainer}>
+//             <label>
+//               {" "}
+//               Fecha de Nacimiento
+//               <input
+//                 placeholder="Fecha de nacimiento"
+//                 type="date"
+//                 name="fechaNacimiento"
+//                 value={formData.fechaNacimiento}
+//                 onChange={handleInputChange}
+//                 className={style.inputdate}
+//                 required
+//               />
+//             </label>
+//           </div>
+//           <div className={style.inputContainer}>
+//             <label>
+//               {" "}
+//               Fecha de Afiliacion
+//               <input
+//                 placeholder="Fecha de afiliación"
+//                 type="date"
+//                 name="fechaAfiliacion"
+//                 value={formData.fechaAfiliacion}
+//                 onChange={handleInputChange}
+//                 className={style.inputdate}
+//               />
+//             </label>
+//           </div>
+//         </div>
 
 //         <div className={style.inputContainer}>
-//           <label> Fecha de Nacimiento
-//             <input
-//               placeholder="Fecha de nacimiento"
-//               type="date"
-//               name="fechaNacimiento"
-//               value={formData.fechaNacimiento}
-//               onChange={handleInputChange}
-//               className={style.inputdate}
-//             />
-//           </label>
-//         </div>
-//         <div className={style.inputContainer}>
-//           <label> Fecha de Afiliacion
-//             <input
-//               placeholder="Fecha de afiliación"
-//               type="date"
-//               name="fechaAfiliacion"
-//               value={formData.fechaAfiliacion}
-//               onChange={handleInputChange}
-//               className={style.inputdate}
-//             />
-//           </label>
-//         </div>
-//         </div>
-
-//          <div className={style.inputContainer}>
 //           <label>
 //             <input
 //               placeholder="Estatura en metros"
@@ -331,6 +375,7 @@ export default ComponentProfile;
 //               value={formData.estatura}
 //               onChange={handleInputChange}
 //               className={style.input}
+//               required
 //             />
 //           </label>
 //         </div>
@@ -342,6 +387,7 @@ export default ComponentProfile;
 //               value={formData.posicion}
 //               onChange={handleInputChange}
 //               className={style.input}
+//               required
 //             >
 //               <option value="">Seleccione...</option>
 //               <option value="Derecha">Derecha</option>
@@ -357,6 +403,7 @@ export default ComponentProfile;
 //               value={formData.disponibilidad}
 //               onChange={handleInputChange}
 //               className={style.input}
+//               required
 //             >
 //               <option value="">Seleccione...</option>
 //               <option value="Semana Mayor">Semana Mayor</option>
@@ -373,6 +420,7 @@ export default ComponentProfile;
 //               value={formData.urquilla}
 //               onChange={handleInputChange}
 //               className={style.input}
+//               required
 //             >
 //               <option value="">Seleccione...</option>
 //               <option value="Si">Si</option>
@@ -381,19 +429,18 @@ export default ComponentProfile;
 //           </label>
 //         </div>
 
-//          <div className={style.buttoncontainer}>
-//         <div className={style.inputContainer}>
-//           <button type="submit"  onSubmit={handleSaveSubmit} className={style.button}>
-//             Guardar
-//           </button>
+//         <div className={style.buttoncontainer}>
+//           <div className={style.inputContainer}>
+//             <button type="submit" className={style.button}>
+//               Guardar
+//             </button>
+//           </div>
+//           <div className={style.inputContainer}>
+//             <button type="submit" className={style.button}>
+//               Actualizar
+//             </button>
+//           </div>
 //         </div>
-//         <div className={style.inputContainer}>
-//           <button type="submit" className={style.button}>
-//             Actualizar
-//           </button>
-//         </div>
-//         </div>
-
 //       </form>
 //     </div>
 //   );
