@@ -96,6 +96,7 @@ const ComponentLogin = () => {
               value={formData.email}
               onChange={handleInputChange}
               className={styles.input}
+              required
             />
           </div>
 

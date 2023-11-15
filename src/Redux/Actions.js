@@ -1,40 +1,60 @@
 /* eslint-disable no-unused-vars */
-import { GET_SERVICIOS, GET_COLABORADORES, GET_PROYECTOS } from "./ActionsTypes";
-import servicios from "./Servicios";
-import Colaboradores from "./Colaboradores";
-import Proyectos from "./Proyectos"
+import { GET_SERVICIOS } from "./ActionsTypes";
+import { db } from "../../api/firebase/FirebaseConfig/FirebaseConfig";
+import { addDoc, collection } from "firebase/firestore";
 
-
-
-export const getProyectos =()=>{
-return async (dispatch)=>{
-  try {
-    dispatch({
-      type: GET_PROYECTOS,
-      payload: Proyectos
-    })
-    
-  } catch (error) {
-    throw error;
-  }
-}
-
-}
-
- export const getColaboradores =() =>{
-
-  return async (dispatch) =>{
+export const postProfile =(user)=>{ 
+console.log("999999999999999999999999", user)
+  return async (dispatch)=>{ 
     try {
-      dispatch({
-        type: GET_COLABORADORES,
-        payload:Colaboradores
-      })
-      
+      const userCollection = collection(db, "user")
+      await addDoc(userCollection, user)
     } catch (error) {
-      throw error;
+      console.error(error);
     }
-  }
+   }
  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
