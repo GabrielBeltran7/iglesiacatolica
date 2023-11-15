@@ -34,8 +34,17 @@ const ComponentProfile = () => {
 
   const handleSaveSubmit = (e) => {
     e.preventDefault();
-    
-    dispatch(postProfile(formData))
+     dispatch(postProfile(formData))
+     setFormData({
+      nombre: "",
+      apellidos: "",
+      fechaNacimiento: "",
+      fechaAfiliacion: "",
+      estatura: "",
+      posicion: "",
+      disponibilidad: "",
+      urquilla: "",
+     })
   };
 
   useEffect(() => {
