@@ -95,11 +95,7 @@ const ComponentProfile = () => {
         </div>
         </div>
 
-
-
-
-
-        <div className={style.inputContainer}>
+         <div className={style.inputContainer}>
           <label>
             <input
               placeholder="Estatura en metros"
@@ -157,11 +153,22 @@ const ComponentProfile = () => {
             </select>
           </label>
         </div>
+
+
+         <div className={style.buttoncontainer}>
         <div className={style.inputContainer}>
           <button type="submit" className={style.button}>
-            Enviar
+            Guardar
           </button>
         </div>
+        <div className={style.inputContainer}>
+          <button type="submit" className={style.button}>
+            Actualizar
+          </button>
+        </div>
+        </div> 
+
+
       </form>
     </div>
   );
