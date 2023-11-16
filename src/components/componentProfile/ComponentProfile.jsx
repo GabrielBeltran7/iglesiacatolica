@@ -1,14 +1,14 @@
-
-
 import React, { useState, useEffect } from "react";
 import style from "./ComponentProfile.module.css";
 import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postProfile } from "../../Redux/Actions";
 import { onAuthStateChanged } from "firebase/auth";
 
+
 const ComponentProfile = () => {
   const dispatch = useDispatch();
+
   const dateUser = auth.currentUser;
   const userId = dateUser?.uid ?? "";
   const userEmail = dateUser?.email ?? "";
@@ -25,8 +25,11 @@ const ComponentProfile = () => {
     userId: userId,
     admin: true,
   });
-
   const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    if (name === "estatura" && !/^\d*\.?\d*$/.test(value)) {
+      return; // No actualiza el estado si no cumple con el formato deseado
+    }
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
@@ -36,6 +39,7 @@ const ComponentProfile = () => {
   const handleSaveSubmit = (e) => {
     e.preventDefault();
     dispatch(postProfile(formData));
+   
     setFormData({
       nombre: "",
       apellidos: "",
@@ -47,6 +51,7 @@ const ComponentProfile = () => {
       email: userEmail,
       userId: userId,
       fechaAfiliacion: formattedDate,
+      admin:false,
     });
   };
 
@@ -68,10 +73,10 @@ const ComponentProfile = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // El usuario está autenticado
-        console.log("Usuario autenticado:", user);
+    console.log("usuario logueado", user)
       } else {
         // El usuario no está autenticado
-        console.log("Usuario no autenticado");
+      
       }
      
     });
