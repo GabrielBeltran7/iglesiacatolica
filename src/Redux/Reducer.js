@@ -1,22 +1,28 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-fallthrough */
+
 import {
-  GET_SERVICIOS
   
+  GET_ALLUSER,
+  GET_USER_BY_EMAIL
 } from "./ActionsTypes";
 let inicialState = {
- 
-  userprofile: [],
-  
-  
+  allUsers: [],
+  UserProfileByEmail:[],
 };
+
 
 const rootReducer = (state = inicialState, action) => {
   switch (action.type) {
-      case GET_SERVICIOS:
+
+      case GET_ALLUSER:
         return {
           ...state,
-          userprofile: action.payload,
+          allUsers: action.payload,
+        };
+
+        case GET_USER_BY_EMAIL:
+        return {
+          ...state,
+          UserProfileByEmail: action.payload,
         };
       default:
       return state;

@@ -1,1 +1,2 @@
-export const GET_SERVICIOS = "GET_SERVICIOS";
+export const GET_ALLUSER = "GET_ALLUSER"
+export const GET_USER_BY_EMAIL = "GET_USER_BY_EMAIL"

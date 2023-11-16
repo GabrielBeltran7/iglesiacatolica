@@ -4,10 +4,12 @@ import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { postProfile } from "../../Redux/Actions";
 import { onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 
 const ComponentProfile = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const dateUser = auth.currentUser;
   const userId = dateUser?.uid ?? "";
@@ -81,11 +83,19 @@ const ComponentProfile = () => {
      
     });
  
-    
    
   }, []);
+  const navigateHomeAdmin =()=>{
+    navigate("/homeadmin")
+
+  }
   return (
     <div className={style.container}>
+       <div className={style.inputContainer}>
+            <button onClick={navigateHomeAdmin} type="submit" className={style.button}>
+              admin
+            </button>
+          </div>
       <h2 className={style.labelTitle}>Mis Datos</h2>
       <form className={style.form} onSubmit={handleSaveSubmit}>
         <div className={style.div}>

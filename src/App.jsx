@@ -7,8 +7,19 @@ import RecoverPassword from './views/recoverPassword/recoverPassword.jsx';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import ComponentProfile from './components/componentProfile/ComponentProfile.jsx';
+import HomeAdmin from './views/HomeAdmin/HomeAdmin.jsx';
+import {getUserProfile} from "../src/Redux/Actions.js"
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
+  const allUsers = useSelector((state)=>state.allUsers)
+console.log(allUsers)
+  const dispatch =useDispatch()
+useEffect(()=>{
+dispatch(getUserProfile())
+},[])
+
   return (
     <Router>
       <>
@@ -22,6 +33,7 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/passwordrecover' element={<RecoverPassword />}/>
           <Route path='/profile' element={<ComponentProfile />}/>
+          <Route path='/homeadmin' element={<HomeAdmin />}/>
         </Routes>
         <Footer/>
         
