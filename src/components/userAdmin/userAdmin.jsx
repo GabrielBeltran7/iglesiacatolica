@@ -134,12 +134,13 @@ const RecargarPuntos = () => {
     ),
 
     onFilter: (value, record) =>
-      record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
-    onFilterDropdownOpenChange: (visible) => {
-      if (visible) {
-        setTimeout(() => searchInput.current?.select(), 100);
-      }
-    },
+    (record[dataIndex] && record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())) || false,
+  onFilterDropdownOpenChange: (visible) => {
+    if (visible) {
+      setTimeout(() => searchInput.current?.select(), 100);
+    }
+  },
+  
 
     render: (text) =>
       searchedColumn === dataIndex ? (
@@ -228,7 +229,7 @@ const RecargarPuntos = () => {
         <button onClick={exportToExcel}>Exportar a excel 📑</button>
       </div>
 
-      <Table columns={columns} dataSource={allUsers} /> {/* Agregué la propiedad dataSource */}
+      <Table columns={columns} dataSource={allUsers} /> 
       <div>
         <div className={style.containerAviso}></div>
       </div>
