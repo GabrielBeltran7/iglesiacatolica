@@ -54,7 +54,6 @@ const ComponentProfile = () => {
     user: true,
   });
   useEffect(() => {
-    // Cargar los datos del usuario al montar el componente o al actualizar la página
     setInputs({
       nombre: userByemail.nombre || "",
       apellidos: userByemail.apellidos || "",
