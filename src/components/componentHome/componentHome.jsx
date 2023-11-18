@@ -9,7 +9,7 @@ import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig";
 const ComponentHome = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
-  const userByemail = useSelector((state)=>state.UserProfileByEmail)
+
 
   const dateUser = auth.currentUser;
   const userEmail = dateUser?.email ?? "";

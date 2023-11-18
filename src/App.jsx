@@ -8,9 +8,25 @@ import Navbar from './components/Navbar/Navbar.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import ComponentProfile from './components/componentProfile/ComponentProfile.jsx';
 import HomeAdmin from './views/HomeAdmin/HomeAdmin.jsx';
-
-
+import { useDispatch, useSelector } from 'react-redux';
+import { auth } from '../api/firebase/FirebaseConfig/FirebaseConfig.js';
+import { useEffect } from 'react';
+import { getUserProfileByEmail } from './Redux/Actions.js';
 function App() {
+  const dispatch = useDispatch()
+
+  const userByemail = useSelector((state)=>state.UserProfileByEmail)
+
+  const dateUser = auth.currentUser;
+  const userEmail = dateUser?.email ?? "";
+console.log(userEmail)
+  
+  useEffect(() => {
+    if (userEmail){
+      dispatch(getUserProfileByEmail(userEmail));
+    }
+    
+  }, [userEmail]);
 
 
   return (
@@ -19,14 +35,13 @@ function App() {
       <div >
       <Navbar/>
       </div>
-    
-        <Routes>
+     <Routes>
           <Route path="/" element={<Home />} />
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />} />
           <Route path='/passwordrecover' element={<RecoverPassword />}/>
           <Route path='/profile' element={<ComponentProfile />}/>
-          <Route path='/homeadmin' element={<HomeAdmin />}/>
+          <Route path='/homeadmin' element={ userByemail.admin ? <HomeAdmin />: <ComponentProfile/>}/>
         </Routes>
         <Footer/>
         

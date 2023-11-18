@@ -10,12 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const userByemail = useSelector((state)=>state.UserProfileByEmail)
-  console.log("11111111111111111111", userByemail)
+
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const dateUser = auth.currentUser;
   const userEmail = dateUser?.email ?? "";
-console.log("33333333333333333", userEmail)
+
   
 
   const handleLogout = async () => {
