@@ -4,12 +4,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
-  border-radius: 15px;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #33333300; /* Añadido un fondo para mayor contraste */
+  background-color: #00000000; /* Color de fondo del footer */
+  padding: 20px; /* Espacio interno del footer */
 }
 
 .containerprincipal a {

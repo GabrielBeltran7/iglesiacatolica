@@ -1,16 +1,25 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import styles from "./Navbar.module.css";
 import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig";
 import { RESET_STATE } from "../../Redux/ActionsTypes";
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import {getUserProfileByEmail} from "../../Redux/Actions"
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
+  const userByemail = useSelector((state)=>state.UserProfileByEmail)
+ 
+
   const navigate = useNavigate();
   const dispatch = useDispatch()
+  const dateUser = auth.currentUser;
+  const userEmail = dateUser?.email ?? "";
+
+  useEffect(() => {
+    dispatch(getUserProfileByEmail(userEmail));
+  }, [userEmail]);
 
   const handleLogout = async () => {
     try {
@@ -18,17 +27,14 @@ const Navbar = () => {
       dispatch({
         type:RESET_STATE
        })
-      navigate("/"); // Redirige a la página de inicio de sesión después de cerrar sesión
+      navigate("/"); 
       
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
     }
   };
 
-  const dateUser = auth.currentUser;
-  const userEmail = dateUser?.email ?? "";
-  console.log("7777777777777777", userEmail);
-
+  
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -66,79 +72,29 @@ const Navbar = () => {
             Cerrar Sesión
           </Link>
         )}
-        <Link to="/register" onClick={closeMenu}>
+         {!userEmail? (
+          <Link to="/register" onClick={() => { closeMenu()}}>
           Regístrate
         </Link>
+        ) :""}
+        
+        {userByemail.admin? (
+          <Link to="/homeadmin" onClick={() => { closeMenu()}}>
+          Administrador
+        </Link>
+        ) : (
+          <Link to="/" onClick={() => { closeMenu() }}>
+            
+          </Link>
+        )}
+         {userEmail? (
+          <Link to="/profile" onClick={() => { closeMenu()}}>
+          Perfil
+        </Link>
+        ) :""}
       </div>
     </div>
   );
 };
 
 export default Navbar;
-
-// import React, { useState } from "react";
-// import { Link } from "react-router-dom";
-// import { FaBars } from "react-icons/fa";
-// import styles from "./Navbar.module.css";
-// import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig";
-// const Navbar = () => {
-//   const [showMenu, setShowMenu] = useState(false);
-
-//   const handleLogout = async () => {
-//     try {
-//       await auth.signOut();
-//       navigate("/login"); // Redirige a la página de inicio de sesión después de cerrar sesión
-//     } catch (error) {
-//       console.error("Error al cerrar sesión:", error);
-//     }
-//   };
-
-
-
-//   const dateUser = auth.currentUser;
-//   const userId = dateUser?.uid ?? "";
-//   const userEmail = dateUser?.email ?? "";
-//   console.log("7777777777777777",userEmail)
-//   const toggleMenu = () => {
-//     setShowMenu(!showMenu);
-//   };
-
-//   const closeMenu = () => {
-//     setShowMenu(false);
-//   };
-//   return (
-//     <div className={styles.navcontainer}>
-//       <Link to="/">
-//         <img
-//           src="https://e7.pngegg.com/pngimages/559/658/png-clipart-catholic-church-catholicism-priest-plan-intarsia-cross-with-praying-hands-logo-signage.png"
-//           alt="logoiglesiacatolica"
-//         />
-//       </Link>
-//       <div
-//         className={`${styles.menuicono} ${showMenu ? styles.active : ""}`}
-//         onClick={toggleMenu}
-//       >
-//         <FaBars />
-//       </div>
-//       <div
-//         className={`${styles.linkcontainer} ${showMenu ? styles.active : ""}`}
-//       >
-//         <Link to="/" onClick={closeMenu}>
-//           Inicio
-//         </Link>
-//         { !userEmail ? <Link to="/login" onClick={closeMenu}>
-//             Inicia Sesion
-//           </Link> :<Link to="/login" onClick={handleLogout}>
-//             cerrar sesion
-//           </Link>
-//         }
-
-//         <Link to="/register" onClick={closeMenu}>
-//           Registrate
-//         </Link>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Navbar;

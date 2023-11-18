@@ -1,6 +1,3 @@
-
-  
-
 import React, { useState, useEffect } from "react";
 import style from "./ComponentProfile.module.css";
 import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig";
@@ -13,11 +10,12 @@ const ComponentProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userByemail = useSelector((state) => state.UserProfileByEmail);
- 
+console.log("************", userByemail)
 
   const dateUser = auth.currentUser;
   const userId = dateUser?.uid ?? "";
   const userEmail = dateUser?.email ?? "";
+  console.log("//////////////////////", userEmail)
   useEffect(() => {
     dispatch(getUserProfileByEmail(userEmail));
   }, [userEmail]);
@@ -34,7 +32,7 @@ const ComponentProfile = () => {
     urquilla: "",
     email: userEmail,
     userId: userId,
-    admin: true,
+    admin: false,
     user:true
   });
 
@@ -49,7 +47,7 @@ const ComponentProfile = () => {
     urquilla: "",
     email: "",
     id: "",
-    admin: true,
+    admin: false,
     user: true,
   });
   useEffect(() => {
@@ -65,7 +63,7 @@ const ComponentProfile = () => {
       urquilla: userByemail.urquilla || "",
       email: userByemail.email || "",
       id: userByemail.id || "",
-      admin: true,
+      admin: false,
       user: true,
     });
   }, [userByemail]); 
@@ -151,17 +149,9 @@ const ComponentProfile = () => {
     navigate("/homeadmin");
   };
 
-  return !userByemail.user ? (
+  return userByemail.length===0 ? (
     <div className={style.container}>
-      <div className={style.inputContainer}>
-        <button
-          onClick={navigateHomeAdmin}
-          type="submit"
-          className={style.button}
-        >
-          admin
-        </button>
-      </div>
+      
       <h2 className={style.labelTitle}>Registrar Datos</h2>
       <form className={style.form} onSubmit={handleSaveSubmit}>
         <div className={style.div}>
@@ -300,34 +290,15 @@ const ComponentProfile = () => {
     </div>
   ) : 
   
-  
-  
-  
-
-
-
-
-
-
-
-
-  
   (
     <div className={style.container}>
-      <div className={style.inputContainer}>
-        <button
-          onClick={navigateHomeAdmin}
-          type="submit"
-          className={style.button}
-        >
-          admin
-        </button>
-      </div>
+     
       <h2 className={style.labelTitle}>Mis Datos</h2>
       <form className={style.form} onSubmit={handleUpdateSubmit}>
         <div className={style.div}>
           <div className={style.inputContainer}>
             <label>
+            {" "}
               <input
                 placeholder="Nombre"
                 type="text"
@@ -341,6 +312,7 @@ const ComponentProfile = () => {
           </div>
           <div className={style.inputContainer}>
             <label>
+            {" "}
               <input
                 placeholder="Apellidos:"
                 type="text"
@@ -372,7 +344,7 @@ const ComponentProfile = () => {
           </div>
           <div className={style.inputContainer}>
             <label>
-              {" "}
+              
               Fecha de Afiliacion
               <input
                 placeholder="Fecha de afiliación"
@@ -462,6 +434,7 @@ const ComponentProfile = () => {
 };
 
 export default ComponentProfile;
+
 
 
 

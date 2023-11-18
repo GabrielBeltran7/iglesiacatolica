@@ -52,7 +52,7 @@ export const updateProfile = (inputs) => {
 
 
 export const getUserProfileByEmail = (email) => {
-  console.log("gggggggggggggg", email)
+
   return async (dispatch) => {
     try {
       const userCollection = collection(db, 'user');
