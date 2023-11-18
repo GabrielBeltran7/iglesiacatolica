@@ -82,11 +82,7 @@ const Navbar = () => {
           <Link to="/homeadmin" onClick={() => { closeMenu()}}>
           Administrador
         </Link>
-        ) : (
-          <Link to="/" onClick={() => { closeMenu() }}>
-            
-          </Link>
-        )}
+        ) : ""}
          {userEmail? (
           <Link to="/profile" onClick={() => { closeMenu()}}>
           Perfil

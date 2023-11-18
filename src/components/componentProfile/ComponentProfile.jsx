@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import style from "./ComponentProfile.module.css";
 import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig";
 import { useDispatch, useSelector } from "react-redux";
-import { postProfile, getUserProfileByEmail, updateProfile } from "../../Redux/Actions";
+import {
+  postProfile,
+  getUserProfileByEmail,
+  updateProfile,
+} from "../../Redux/Actions";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -10,19 +14,18 @@ const ComponentProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userByemail = useSelector((state) => state.UserProfileByEmail);
-console.log("************", userByemail)
+  console.log("************", userByemail);
 
   const dateUser = auth.currentUser;
   const userId = dateUser?.uid ?? "";
   const userEmail = dateUser?.email ?? "";
-  console.log("//////////////////////", userEmail)
+  console.log("//////////////////////", userEmail);
   useEffect(() => {
     dispatch(getUserProfileByEmail(userEmail));
   }, [userEmail]);
 
-
   const [formData, setFormData] = useState({
-    nombre:  "",
+    nombre: "",
     apellidos: "",
     fechaNacimiento: "",
     fechaAfiliacion: "",
@@ -33,7 +36,7 @@ console.log("************", userByemail)
     email: userEmail,
     userId: userId,
     admin: false,
-    user:true
+    user: true,
   });
 
   const [inputs, setInputs] = useState({
@@ -66,9 +69,7 @@ console.log("************", userByemail)
       admin: false,
       user: true,
     });
-  }, [userByemail]); 
-
- 
+  }, [userByemail]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -113,13 +114,11 @@ console.log("************", userByemail)
     });
   };
 
-
   const handleUpdateSubmit = (e) => {
     e.preventDefault();
     dispatch(updateProfile(inputs));
     dispatch(getUserProfileByEmail(userEmail));
   };
-
 
   const today = new Date();
   const formattedDate = today.toISOString().split("T")[0];
@@ -149,9 +148,8 @@ console.log("************", userByemail)
     navigate("/homeadmin");
   };
 
-  return userByemail.length===0 ? (
+  return userByemail.length === 0 ? (
     <div className={style.container}>
-      
       <h2 className={style.labelTitle}>Registrar Datos</h2>
       <form className={style.form} onSubmit={handleSaveSubmit}>
         <div className={style.div}>
@@ -241,6 +239,7 @@ console.log("************", userByemail)
               <option value="">Seleccione...</option>
               <option value="Derecha">Derecha</option>
               <option value="Izquierda">Izquierda</option>
+              <option value="No aplica">No Aplica</option>
             </select>
           </label>
         </div>
@@ -258,6 +257,7 @@ console.log("************", userByemail)
               <option value="Semana Mayor">Semana Mayor</option>
               <option value="Viernes Santo">Viernes Santo</option>
               <option value="Ambas">Ambas</option>
+              <option value="No aplica">No Aplica</option>
             </select>
           </label>
         </div>
@@ -274,6 +274,7 @@ console.log("************", userByemail)
               <option value="">Seleccione...</option>
               <option value="Si">Si</option>
               <option value="No">No</option>
+              <option value="No aplica">No Aplica</option>
             </select>
           </label>
         </div>
@@ -284,21 +285,17 @@ console.log("************", userByemail)
               Guardar
             </button>
           </div>
-          
         </div>
       </form>
     </div>
-  ) : 
-  
-  (
+  ) : (
     <div className={style.container}>
-     
       <h2 className={style.labelTitle}>Mis Datos</h2>
       <form className={style.form} onSubmit={handleUpdateSubmit}>
         <div className={style.div}>
           <div className={style.inputContainer}>
             <label>
-            {" "}
+              {" "}
               <input
                 placeholder="Nombre"
                 type="text"
@@ -312,7 +309,7 @@ console.log("************", userByemail)
           </div>
           <div className={style.inputContainer}>
             <label>
-            {" "}
+              {" "}
               <input
                 placeholder="Apellidos:"
                 type="text"
@@ -344,7 +341,6 @@ console.log("************", userByemail)
           </div>
           <div className={style.inputContainer}>
             <label>
-              
               Fecha de Afiliacion
               <input
                 placeholder="Fecha de afiliación"
@@ -384,6 +380,7 @@ console.log("************", userByemail)
               <option value="">Seleccione...</option>
               <option value="Derecha">Derecha</option>
               <option value="Izquierda">Izquierda</option>
+              <option value="No aplica">No Aplica</option>
             </select>
           </label>
         </div>
@@ -401,6 +398,7 @@ console.log("************", userByemail)
               <option value="Semana Mayor">Semana Mayor</option>
               <option value="Viernes Santo">Viernes Santo</option>
               <option value="Ambas">Ambas</option>
+              <option value="No aplica">No Aplica</option>
             </select>
           </label>
         </div>
@@ -417,6 +415,7 @@ console.log("************", userByemail)
               <option value="">Seleccione...</option>
               <option value="Si">Si</option>
               <option value="No">No</option>
+              <option value="No aplica">No Aplica</option>
             </select>
           </label>
         </div>
@@ -435,15 +434,6 @@ console.log("************", userByemail)
 
 export default ComponentProfile;
 
-
-
-
-
-
-
-
-
-
 // import React, { useState, useEffect } from "react";
 // import style from "./ComponentProfile.module.css";
 // import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig";
@@ -461,7 +451,6 @@ export default ComponentProfile;
 //   const dateUser = auth.currentUser;
 //   const userId = dateUser?.uid ?? "";
 //   const userEmail = dateUser?.email ?? "";
-
 
 //   const [formData, setFormData] = useState({
 //     nombre:  "",
@@ -539,13 +528,11 @@ export default ComponentProfile;
 //     });
 //   };
 
-
 //   const handleUpdateSubmit = (e) => {
 //     e.preventDefault();
 //     dispatch(updateProfile(inputs));
 //     dispatch(getUserProfileByEmail(userEmail));
 //   };
-
 
 //   const today = new Date();
 //   const formattedDate = today.toISOString().split("T")[0];
@@ -718,24 +705,12 @@ export default ComponentProfile;
 //               Guardar
 //             </button>
 //           </div>
-          
+
 //         </div>
 //       </form>
 //     </div>
-//   ) : 
-  
-  
-  
-  
+//   ) :
 
-
-
-
-
-
-
-
-  
 //   (
 //     <div className={style.container}>
 //       <div className={style.inputContainer}>
