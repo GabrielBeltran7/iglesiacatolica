@@ -14,14 +14,18 @@ const ComponentProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userByemail = useSelector((state) => state.UserProfileByEmail);
-  console.log("************", userByemail);
+
 
   const dateUser = auth.currentUser;
   const userId = dateUser?.uid ?? "";
   const userEmail = dateUser?.email ?? "";
-  console.log("//////////////////////", userEmail);
+ console.log("prueba", userEmail)
+ 
   useEffect(() => {
-    dispatch(getUserProfileByEmail(userEmail));
+    if (userEmail){
+      dispatch(getUserProfileByEmail(userEmail));
+    }
+    
   }, [userEmail]);
 
   const [formData, setFormData] = useState({

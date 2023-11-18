@@ -6,20 +6,17 @@ import styles from "./Navbar.module.css";
 import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig";
 import { RESET_STATE } from "../../Redux/ActionsTypes";
 import { useDispatch, useSelector } from "react-redux";
-import {getUserProfileByEmail} from "../../Redux/Actions"
+
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const userByemail = useSelector((state)=>state.UserProfileByEmail)
- 
-
+  console.log("11111111111111111111", userByemail)
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const dateUser = auth.currentUser;
   const userEmail = dateUser?.email ?? "";
-
-  useEffect(() => {
-    dispatch(getUserProfileByEmail(userEmail));
-  }, [userEmail]);
+console.log("33333333333333333", userEmail)
+  
 
   const handleLogout = async () => {
     try {
@@ -33,7 +30,6 @@ const Navbar = () => {
       console.error("Error al cerrar sesión:", error);
     }
   };
-
   
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -78,7 +74,7 @@ const Navbar = () => {
         </Link>
         ) :""}
         
-        {userByemail.admin? (
+        {userByemail.admin && userEmail? (
           <Link to="/homeadmin" onClick={() => { closeMenu()}}>
           Administrador
         </Link>

@@ -9,7 +9,7 @@ let inicialState = {
   allUsers: [],
   UserProfileByEmail:[],
 };
-console.log("***************************",inicialState)
+
 
 const rootReducer = (state = inicialState, action) => {
   switch (action.type) {

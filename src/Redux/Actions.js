@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 
 
 export const updateProfile = (inputs) => {
-  console.log("miercoles", inputs);
+
 
   return async (dispatch) => {
     try {

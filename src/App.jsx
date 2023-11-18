@@ -8,16 +8,10 @@ import Navbar from './components/Navbar/Navbar.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import ComponentProfile from './components/componentProfile/ComponentProfile.jsx';
 import HomeAdmin from './views/HomeAdmin/HomeAdmin.jsx';
-import {getUserProfile} from "../src/Redux/Actions.js"
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+
 
 function App() {
 
-  const dispatch =useDispatch()
-useEffect(()=>{
-dispatch(getUserProfile())
-},[])
 
   return (
     <Router>
