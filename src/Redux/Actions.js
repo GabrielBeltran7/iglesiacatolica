@@ -24,8 +24,8 @@ export const updateProfile = (inputs) => {
         disponibilidad: inputs.disponibilidad,
         urquilla: inputs.urquilla,
         email: inputs.email,
-        admin: true,
-        user:true
+        admin: inputs.admin,
+        user:inputs.user
       };
 
       // Actualizar el documento con los datos actualizados
