@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import style from "./ComponentProfile.module.css";
 import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig";
 import { useDispatch, useSelector } from "react-redux";
+import ComponentOfferings from "../ComponentOfferings/ComponentOfferings";
 import {
   postProfile,
   getUserProfileByEmail,
@@ -290,6 +291,7 @@ const ComponentProfile = () => {
           </div>
         </div>
       </form>
+      <ComponentOfferings></ComponentOfferings>
     </div>
   ) : (
     <div className={style.container}>
@@ -431,6 +433,10 @@ const ComponentProfile = () => {
           </div>
         </div>
       </form>
+      <div className={style.offering}>
+      <ComponentOfferings></ComponentOfferings>
+      </div>
+      
     </div>
   );
 };
