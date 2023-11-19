@@ -8,12 +8,12 @@ import {
 import { Layout, Menu, Button, theme } from "antd";
 import style from "./HomeAdmin.module.css";
 
-import RecargarPuntos from "../../components/userAdmin/userAdmin";
+import ReportAllUsers from "../../components/userAdmin/userAdmin";
 
 import { useDispatch } from "react-redux";
 
 import { useNavigate, useParams } from "react-router-dom";
-
+import ComponentReportOfferings from "../../components/componentReportOfferings/componentReportOfferings";
 const { Header, Sider, Content } = Layout;
 const HomeAdmin = () => {
   const { username } = useParams();
@@ -40,7 +40,10 @@ const HomeAdmin = () => {
   const renderSelectedComponent = () => {
     switch (selectedItem) {
       case "1":
-        return <RecargarPuntos />;
+        return <ReportAllUsers />;
+        
+        case "2":
+          return <ComponentReportOfferings />;
       
       default:
         return null;
@@ -108,6 +111,7 @@ const HomeAdmin = () => {
           </Content>
         </Layout>
       </Layout>
+      
     </div>
   );
 };

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as XLSX from "xlsx";
 import moment from "moment";
 import Swal from "sweetalert2";
-import { getUserProfile } from "../../Redux/Actions"; // Asegúrate de importar apdateRoluser
+import { getReportOffering } from "../../Redux/Actions"; // Asegúrate de importar apdateRoluser
 import style from "./ComponentReportOfferings.module.css";
 
 const ComponentReportOfferings = () => {
@@ -14,13 +14,13 @@ const ComponentReportOfferings = () => {
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
 
-  const allUsers = useSelector((state) => state.allUsers);
+  const offering = useSelector((state) => state.allOffering);
 
 
-  if (allUsers) {
-    allUsers.forEach((user) => {
-      user.createdAt = moment(user.createdAt).format("YYYY-MM-DD HH:mm:ss");
-      user.updatedAt = moment(user.updatedAt).format("YYYY-MM-DD HH:mm:ss");
+  if (offering) {
+    offering.forEach((offering) => {
+      offering.createdAt = moment(offering.createdAt).format("YYYY-MM-DD HH:mm:ss");
+      offering.updatedAt = moment(offering.updatedAt).format("YYYY-MM-DD HH:mm:ss");
     });
   }
 
@@ -29,15 +29,15 @@ const ComponentReportOfferings = () => {
 
 
   const exportToExcel = () => {
-    const ws = XLSX.utils.json_to_sheet(allUsers);
+    const ws = XLSX.utils.json_to_sheet(offering);
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "User");
+    XLSX.utils.book_append_sheet(wb, ws, "offering");
 
     // Guardar el archivo de Excel
-    XLSX.writeFile(wb, "users.xlsx");
+    XLSX.writeFile(wb, "offering.xlsx");
   };
   useEffect(() => {
-    dispatch(getUserProfile());
+    dispatch(getReportOffering());
   }, [dispatch]); 
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -181,41 +181,18 @@ const ComponentReportOfferings = () => {
       ...getColumnSearchProps("email"),
     },
     {
-      title: "disponibilidad",
-      dataIndex: "disponibilidad",
-      key: "disponibilidad",
-      ...getColumnSearchProps("disponibilidad"),
+      title: "Fecha de Ofrenda",
+      dataIndex: "fechadeofrenda",
+      key: "fechadeofrenda",
+      ...getColumnSearchProps("fechadeofrenda"),
     },
     {
-      title: "Estatura",
-      dataIndex: "estatura",
-      key: "estatura",
-      ...getColumnSearchProps("estatura"),
+      title: "Cantidad Ofrendada",
+      dataIndex: "cantidadofrendada",
+      key: "cantidadofrendada",
+      ...getColumnSearchProps("cantidadofrendada"),
     },
-    {
-      title: "fecha Afiliacion",
-      dataIndex: "fechaAfiliacion",
-      key: "fechaAfiliacion",
-      ...getColumnSearchProps("fechaAfiliacion"),
-    },
-    {
-      title: "Fecha Nacimiento",
-      dataIndex: "fechaNacimiento",
-      key: "fechaNacimiento",
-      ...getColumnSearchProps("fechaNacimiento"),
-    },
-    {
-      title: "Posicion",
-      dataIndex: "posicion",
-      key: "posicion",
-      ...getColumnSearchProps("posicion"),
-    },
-    {
-      title: "Urquilla",
-      dataIndex: "urquilla",
-      key: "urquilla",
-      ...getColumnSearchProps("urquilla"),
-    },
+   
   ];
 
   return (
@@ -224,7 +201,7 @@ const ComponentReportOfferings = () => {
         <button onClick={exportToExcel}>Exportar a excel 📑</button>
       </div>
 
-      <Table columns={columns} dataSource={allUsers} /> 
+      <Table columns={columns} dataSource={offering} /> 
       <div>
         <div className={style.containerAviso}></div>
       </div>

@@ -3,11 +3,13 @@ import {
   
   GET_ALLUSER,
   GET_USER_BY_EMAIL,
-  RESET_STATE
+  RESET_STATE,
+  GET_OFFERING
 } from "./ActionsTypes";
 let inicialState = {
   allUsers: [],
   UserProfileByEmail:[],
+  allOffering:[],
 };
 
 
@@ -21,6 +23,11 @@ const rootReducer = (state = inicialState, action) => {
         return {
           ...state,
           allUsers: action.payload,
+        };
+        case GET_OFFERING:
+        return {
+          ...state,
+          allOffering: action.payload,
         };
 
         case GET_USER_BY_EMAIL:

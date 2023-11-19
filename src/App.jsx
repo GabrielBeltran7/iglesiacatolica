@@ -11,22 +11,24 @@ import HomeAdmin from "./views/HomeAdmin/HomeAdmin.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../api/firebase/FirebaseConfig/FirebaseConfig.js";
 import { useEffect } from "react";
-import { getUserProfileByEmail } from "./Redux/Actions.js";
+import { getUserProfileByEmail, getUserProfile } from "./Redux/Actions.js";
 import ComponentRegisterOfferings from "./components/componentRegisterOfferings/componentRegisterOfferings.jsx";
 import { onAuthStateChanged } from "firebase/auth";
 
 
 function App() {
   const dispatch = useDispatch();
-
-
-
   const userByemail = useSelector((state) => state.UserProfileByEmail);
 
   const dateUser = auth.currentUser;
   const userEmail = dateUser?.email ?? "";
   useEffect(() => {
     dispatch(getUserProfileByEmail(userEmail));
+  }, [userEmail]);
+
+
+  useEffect(() => {
+    dispatch(getUserProfile());
   }, [userEmail]);
   
   useEffect(() => {
@@ -44,6 +46,9 @@ function App() {
         <div>
           <Navbar />
         </div>
+
+
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -53,6 +58,7 @@ function App() {
             element={userEmail ? <ComponentRegisterOfferings /> : <Login />}
           />
           <Route path="/profile" element={<ComponentProfile />} />
+          <Route path="/passwordrecover" element={<RecoverPassword />} />
           <Route
             path="/homeadmin"
             element={userByemail.admin ? <HomeAdmin /> : <Home />}

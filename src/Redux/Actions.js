@@ -1,10 +1,32 @@
 /* eslint-disable no-unused-vars */
-import { GET_ALLUSER, GET_USER_BY_EMAIL} from "./ActionsTypes";
+import { GET_ALLUSER, GET_USER_BY_EMAIL, GET_OFFERING} from "./ActionsTypes";
 import { db } from "../../api/firebase/FirebaseConfig/FirebaseConfig";
 import { addDoc, collection, getDocs, updateDoc, doc } from 'firebase/firestore';
 import Swal from "sweetalert2";
 
 
+export const getReportOffering = () => {
+  return async (dispatch) => {
+    try {
+      const userCollection = collection(db, 'ofrendas');
+      const querySnapshot = await getDocs(userCollection);
+
+      const reportoffering = [];
+      querySnapshot.forEach((doc) => {
+        reportoffering.push({ id: doc.id, ...doc.data() });
+      });
+
+      dispatch({
+        type: GET_OFFERING,
+        payload: reportoffering,
+      });
+
+  
+    } catch (error) {
+   
+    }
+  };
+};
 
 
 export const postOfferings = (offerings) => {

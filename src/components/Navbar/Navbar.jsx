@@ -6,6 +6,7 @@ import styles from "./Navbar.module.css";
 import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig";
 import { RESET_STATE } from "../../Redux/ActionsTypes";
 import { useDispatch, useSelector } from "react-redux";
+import { getUserProfile, getUserProfileByEmail } from "../../Redux/Actions";
 
 
 const Navbar = () => {
@@ -16,9 +17,14 @@ const Navbar = () => {
   const dispatch = useDispatch()
   const dateUser = auth.currentUser;
   const userEmail = dateUser?.email ??"";
-console.log("3333333333333333333333333", userEmail)
-console.log("444444444444444444444444", userByemail)
 
+useEffect(() => {
+  dispatch(getUserProfile());
+}, [userEmail]);
+
+useEffect(() => {
+  dispatch(getUserProfileByEmail(userEmail));
+}, [userEmail]);
 
   const handleLogout = async () => {
     try {

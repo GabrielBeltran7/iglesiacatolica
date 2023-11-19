@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 import { getUserProfile } from "../../Redux/Actions"; // Asegúrate de importar apdateRoluser
 import style from "./userAdmin.module.css";
 
-const RecargarPuntos = () => {
+const ReportAllUsers = () => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
@@ -237,4 +237,4 @@ const RecargarPuntos = () => {
   );
 };
 
-export default RecargarPuntos;
+export default ReportAllUsers;
