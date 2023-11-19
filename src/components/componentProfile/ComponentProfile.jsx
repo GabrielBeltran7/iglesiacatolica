@@ -19,8 +19,7 @@ const ComponentProfile = () => {
   const dateUser = auth.currentUser;
   const userId = dateUser?.uid ?? "";
   const userEmail = dateUser?.email ?? "";
-  console.log("11111111111111111", userEmail);
-  console.log("22222222222222222", userByemail);
+
 
   useEffect(() => {
 
