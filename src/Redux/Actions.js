@@ -5,6 +5,37 @@ import { addDoc, collection, getDocs, updateDoc, doc } from 'firebase/firestore'
 import Swal from "sweetalert2";
 
 
+
+
+export const postOfferings = (offerings) => {
+ 
+  return async (dispatch) => {
+    try {
+      const userCollection = collection(db, 'ofrendas');
+      const newDocRef = await addDoc(userCollection, offerings);
+      Swal.fire({
+        icon: 'success',
+        title: 'Gracias por tu Ofrenda',
+        timerProgressBar: true,
+        timer: 3000,
+      });
+      
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al registrar la Ofrenda',
+        timerProgressBar: true,
+        timer: 3500,
+      });
+    }
+  };
+};
+
+
+
+
+
+
 export const updateProfile = (inputs) => {
 
 

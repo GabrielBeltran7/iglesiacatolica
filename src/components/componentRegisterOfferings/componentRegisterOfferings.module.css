@@ -14,7 +14,7 @@
   box-shadow: 0 0 20px rgba(1, 2, 2, 0.2);
   background-color: white;
   border: 1px solid #ccc;
-  height: 62%;
+  height: auto;
 }
 
 .labelTitle {
@@ -96,16 +96,13 @@
 .bodyContainer {
   display: flex;
   justify-content: flex-start;
-}.labelerror{
-  color: black;
-  font-size: xx-large;
 }
 
 @media screen and (max-width: 768px) {
   .form {
     width: 75%;
-    height: 75%;
-    
+    height: auto;
+    margin: 20px;
   }
   .bodyContainer {
     margin-left: 0;

@@ -2,23 +2,17 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import style from "./componentHome.module.css";
 import ComponentCarrousel from "../ComponentCarrousel/componentCarrousel";
-import { getUserProfileByEmail } from "../../Redux/Actions";
-import { useDispatch, useSelector } from "react-redux";
+
 import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig";
 
 const ComponentHome = () => {
-  const dispatch = useDispatch()
+ 
   const navigate = useNavigate();
 
 
   const dateUser = auth.currentUser;
   const userEmail = dateUser?.email ?? "";
-  useEffect(() => {
-    if (userEmail){
-      dispatch(getUserProfileByEmail(userEmail));
-    }
-    
-  }, [userEmail]);
+
 
   const navigateLogin = () => {
     navigate("/login");

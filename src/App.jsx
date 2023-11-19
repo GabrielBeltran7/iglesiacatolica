@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { auth } from '../api/firebase/FirebaseConfig/FirebaseConfig.js';
 import { useEffect } from 'react';
 import { getUserProfileByEmail } from './Redux/Actions.js';
+import ComponentRegisterOfferings from './components/componentRegisterOfferings/componentRegisterOfferings.jsx';
+
 function App() {
   const dispatch = useDispatch()
 
@@ -19,12 +21,10 @@ function App() {
 
   const dateUser = auth.currentUser;
   const userEmail = dateUser?.email ?? "";
-console.log(userEmail)
-  
   useEffect(() => {
-    if (userEmail){
+
       dispatch(getUserProfileByEmail(userEmail));
-    }
+    
     
   }, [userEmail]);
 
@@ -39,9 +39,9 @@ console.log(userEmail)
           <Route path="/" element={<Home />} />
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />} />
-          <Route path='/passwordrecover' element={<RecoverPassword />}/>
+          <Route path='/registeroffering' element={ userEmail ? <ComponentRegisterOfferings />: <Login />}/>
           <Route path='/profile' element={<ComponentProfile />}/>
-          <Route path='/homeadmin' element={ userByemail.admin ? <HomeAdmin />: <ComponentProfile/>}/>
+          <Route path='/homeadmin' element={ userByemail.admin ? <HomeAdmin />: <Home />}/>
         </Routes>
         <Footer/>
         

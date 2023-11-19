@@ -7,6 +7,7 @@ import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig";
 import { RESET_STATE } from "../../Redux/ActionsTypes";
 import { useDispatch, useSelector } from "react-redux";
 
+
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const userByemail = useSelector((state)=>state.UserProfileByEmail)
@@ -14,17 +15,20 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
   const dateUser = auth.currentUser;
-  const userEmail = dateUser?.email ?? "";
+  const userEmail = dateUser?.email ??"";
+console.log("3333333333333333333333333", userEmail)
+console.log("444444444444444444444444", userByemail)
 
-  
 
   const handleLogout = async () => {
     try {
       await auth.signOut();
       dispatch({
-        type:RESET_STATE
+        type:RESET_STATE,
+       
        })
       navigate("/"); 
+   
       
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
