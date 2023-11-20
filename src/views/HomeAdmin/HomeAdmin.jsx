@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import ComponentReportOfferings from "../../components/componentReportOfferings/ComponentReportOfferings";
 const { Header, Sider, Content } = Layout;
+import BackButton from "../../components/backButton/backButton";
 const HomeAdmin = () => {
   const { username } = useParams();
   const dispatch = useDispatch();
@@ -58,6 +59,9 @@ const HomeAdmin = () => {
 
   return (
     <div className={style.container}>
+      <div className={style.button}>
+      <BackButton></BackButton>
+      </div>
     <Layout >
         <Sider style={{ background: "rgba(192, 100, 209, 0.835)" }}trigger={null} collapsible collapsed={collapsed}>
           <div className="demo-logo-vertical" />

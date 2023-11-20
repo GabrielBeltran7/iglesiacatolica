@@ -43,7 +43,7 @@ const componentRecoverPassword = () => {
 
   return (
     <>
-      <div className={styles.buttonBack}>
+      <div className={styles.bodyContainer}>
         <BackButton />
       </div>
       <div className={styles.container}>

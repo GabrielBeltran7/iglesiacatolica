@@ -10,6 +10,7 @@ import {
 } from "../../Redux/Actions";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import BackButton from "../backButton/backButton";
 
 const ComponentProfile = () => {
   const dispatch = useDispatch();
@@ -150,6 +151,11 @@ const ComponentProfile = () => {
     navigate("/homeadmin");
   };
   return userByemail.length === 0  ? (
+    <>
+       <div className={style.bodyContainer}>
+        <BackButton />
+      </div>
+
     <div className={style.container}>
       <h2 className={style.labelTitle}>Registrar Datos</h2>
       {userEmail ? (
@@ -294,7 +300,12 @@ const ComponentProfile = () => {
       )}
 
     </div>
+    </>
   ) : (
+    <>
+    <div className={style.bodyContainer}>
+     <BackButton />
+   </div>
     <div className={style.container}>
       <h2 className={style.labelTitle}>Mis Datos</h2>
       {userEmail ? (
@@ -440,6 +451,7 @@ const ComponentProfile = () => {
       )}
       <ComponentOfferings></ComponentOfferings>
     </div>
+    </>
   );
 };
 

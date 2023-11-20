@@ -35,6 +35,8 @@
 .bodyContainer {
   display: flex;
   justify-content: flex-start;
+  margin-left: -95%;
+  justify-content: center;
  
 }
 .form {
@@ -107,7 +109,7 @@
   .form {
     width: 85%;
   } .bodyContainer {
-    margin-left: -80%;
+    margin-left: -75%;
     justify-content: center;
   }
 }

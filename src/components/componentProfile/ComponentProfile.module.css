@@ -96,6 +96,8 @@
 .bodyContainer {
   display: flex;
   justify-content: flex-start;
+  margin-left: -95%;
+  justify-content: center;
 }.labelerror{
   color: black;
   font-size: xx-large;
@@ -108,7 +110,7 @@
     
   }
   .bodyContainer {
-    margin-left: 0;
+    margin-left: -75%;
     justify-content: center;
     
   }
