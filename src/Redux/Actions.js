@@ -5,7 +5,43 @@ import { addDoc, collection, getDocs, updateDoc, doc } from 'firebase/firestore'
 import Swal from "sweetalert2";
 
 
+export const apdateStateUser = (inputs) => {
 
+  console.log("actions11111111111111111111", inputs)
+  return async (dispatch) => {
+    try {
+      const userCollection = collection(db, 'user');
+      const userDocRef = doc(userCollection, inputs.id);
+
+      // Crear un objeto con los datos actualizados
+      const updatedData = {
+        id: inputs.id,
+        user: inputs.user,
+        
+       
+      };
+
+      // Actualizar el documento con los datos actualizados
+      await updateDoc(userDocRef, updatedData);
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Datos actualizados con éxito',
+        timerProgressBar: true,
+        timer: 2000,
+      });
+    } catch (error) {
+      console.error('Error al actualizar los datos:', error);
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Error al actualizar los datos',
+        timerProgressBar: true,
+        timer: 3500,
+      });
+    }
+  };
+};
 
 export const apdateRoluser = (inputs) => {
 
@@ -19,6 +55,7 @@ export const apdateRoluser = (inputs) => {
       const updatedData = {
         id: inputs.id,
         admin: inputs.admin,
+        
        
       };
 

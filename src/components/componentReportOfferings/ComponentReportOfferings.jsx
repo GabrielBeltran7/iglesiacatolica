@@ -162,7 +162,7 @@ const ComponentReportOfferings = () => {
       title: "Nombre",
       dataIndex: "nombre",
       key: "nombre",
-      width: "20%",
+     
       ...getColumnSearchProps("nombre"),
     
     },
@@ -170,14 +170,14 @@ const ComponentReportOfferings = () => {
       title: "Apellido",
       dataIndex: "apellidos",
       key: "apellidos",
-      width: "20%",
+     
       ...getColumnSearchProps("apellidos"),
     },
     {
       title: "Email",
       dataIndex: "email",
       key: "email",
-      width: "20%",
+     
       ...getColumnSearchProps("email"),
     },
     {

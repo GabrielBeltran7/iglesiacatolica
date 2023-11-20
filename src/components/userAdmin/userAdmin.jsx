@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as XLSX from "xlsx";
 import moment from "moment";
 
-import { getUserProfile, apdateRoluser } from "../../Redux/Actions"; 
+import { getUserProfile, apdateRoluser, apdateStateUser } from "../../Redux/Actions"; 
 import style from "./userAdmin.module.css";
 
 const ReportAllUsers = () => {
@@ -16,8 +16,10 @@ const ReportAllUsers = () => {
   const [permissions, setPermissions] = useState({
     
   }); 
-
-
+  
+  const [user, setUser] = useState({
+    
+  }); 
   const allUsers = useSelector((state) => state.allUsers);
 
 
@@ -43,9 +45,23 @@ const ReportAllUsers = () => {
       admin:value})
     );
   };
+
+
+  const handleUserChange = (userId, value) => {
+    setUser({
+      id:userId,
+      admin:value
+    });
+
+    dispatch(apdateStateUser({id:userId,
+      user:value})
+    );
+  };
+
+
   useEffect(() => {
     dispatch(getUserProfile());
-  }, [permissions]);
+  }, [permissions,user]);
 
 
   const exportToExcel = () => {
@@ -231,6 +247,7 @@ const ReportAllUsers = () => {
       key: "urquilla",
       ...getColumnSearchProps("urquilla"),
     },
+
     {
       title: "Permisos",
       dataIndex: "admin",
@@ -247,6 +264,23 @@ const ReportAllUsers = () => {
         </select>
       ),
     },
+    {
+      title: "Estado",
+      dataIndex: "user",
+      key: "user",
+      render: (text, record) => (
+        <select
+          name="user"
+          value={permissions[record.id] || ""}
+          onChange={(e) => handleUserChange(record.id, e.target.value)}
+        >
+          <option value="">{record.user}</option>
+          <option value="Activo">Activo</option>
+          <option value="inactivo">Inactivo</option>
+        </select>
+      ),
+    },
+    
   ];
 
   return (
