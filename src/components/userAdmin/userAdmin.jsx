@@ -1,21 +1,29 @@
 import React, { useRef, useState, useEffect } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
-import { Button, Input, Space, Table, Typography, Select } from "antd";
+import { Button, Input, Space, Table, Select } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import * as XLSX from "xlsx";
 import moment from "moment";
-import Swal from "sweetalert2";
-import { getUserProfile } from "../../Redux/Actions"; // Asegúrate de importar apdateRoluser
+
+import { getUserProfile, apdateRoluser } from "../../Redux/Actions"; 
 import style from "./userAdmin.module.css";
 
 const ReportAllUsers = () => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
+  const [permissions, setPermissions] = useState({
+    
+  }); 
+
 
   const allUsers = useSelector((state) => state.allUsers);
 
+
+  const dispatch = useDispatch();
+
+ 
 
   if (allUsers) {
     allUsers.forEach((user) => {
@@ -25,8 +33,19 @@ const ReportAllUsers = () => {
     });
   }
 
-  const dispatch = useDispatch();
+  const handlePermissionChange = (userId, value) => {
+    setPermissions({
+      id:userId,
+      admin:value
+    });
 
+    dispatch(apdateRoluser({id:userId,
+      admin:value})
+    );
+  };
+  useEffect(() => {
+    dispatch(getUserProfile());
+  }, [permissions]);
 
 
   const exportToExcel = () => {
@@ -37,9 +56,6 @@ const ReportAllUsers = () => {
     // Guardar el archivo de Excel
     XLSX.writeFile(wb, "users.xlsx");
   };
-  useEffect(() => {
-    dispatch(getUserProfile());
-  }, [dispatch]); 
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -132,16 +148,18 @@ const ReportAllUsers = () => {
         }}
       />
     ),
-
     onFilter: (value, record) =>
-    (record[dataIndex] && record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())) || false,
-  onFilterDropdownOpenChange: (visible) => {
-    if (visible) {
-      setTimeout(() => searchInput.current?.select(), 100);
-    }
-  },
-  
-
+      (record[dataIndex] &&
+        record[dataIndex]
+          .toString()
+          .toLowerCase()
+          .includes(value.toLowerCase())) ||
+      false,
+    onFilterDropdownOpenChange: (visible) => {
+      if (visible) {
+        setTimeout(() => searchInput.current?.select(), 100);
+      }
+    },
     render: (text) =>
       searchedColumn === dataIndex ? (
         <Highlighter
@@ -163,30 +181,22 @@ const ReportAllUsers = () => {
       title: "Nombre",
       dataIndex: "nombre",
       key: "nombre",
-      width: "20%",
       ...getColumnSearchProps("nombre"),
-      // render: (text, record) => (
-      //   <a className={style.userName} href={`/cargapuntos/${record.id}`}>
-      //     {text}
-      //   </a>
-      // ),
     },
     {
       title: "Apellido",
       dataIndex: "apellidos",
       key: "apellidos",
-      width: "20%",
       ...getColumnSearchProps("apellidos"),
     },
     {
       title: "Email",
       dataIndex: "email",
       key: "email",
-      width: "20%",
       ...getColumnSearchProps("email"),
     },
     {
-      title: "disponibilidad",
+      title: "Disponibilidad",
       dataIndex: "disponibilidad",
       key: "disponibilidad",
       ...getColumnSearchProps("disponibilidad"),
@@ -198,7 +208,7 @@ const ReportAllUsers = () => {
       ...getColumnSearchProps("estatura"),
     },
     {
-      title: "fecha Afiliacion",
+      title: "Fecha Afiliacion",
       dataIndex: "fechaAfiliacion",
       key: "fechaAfiliacion",
       ...getColumnSearchProps("fechaAfiliacion"),
@@ -221,6 +231,22 @@ const ReportAllUsers = () => {
       key: "urquilla",
       ...getColumnSearchProps("urquilla"),
     },
+    {
+      title: "Permisos",
+      dataIndex: "admin",
+      key: "admin",
+      render: (text, record) => (
+        <select
+          name="admin"
+          value={permissions[record.id] || ""}
+          onChange={(e) => handlePermissionChange(record.id, e.target.value)}
+        >
+          <option value="">{record.admin}</option>
+          <option value="Administrador">Administrador</option>
+          <option value="Usuario">Usuario</option>
+        </select>
+      ),
+    },
   ];
 
   return (
@@ -229,7 +255,7 @@ const ReportAllUsers = () => {
         <button onClick={exportToExcel}>Exportar a excel 📑</button>
       </div>
 
-      <Table columns={columns} dataSource={allUsers} /> 
+      <Table columns={columns} dataSource={allUsers} />
       <div>
         <div className={style.containerAviso}></div>
       </div>

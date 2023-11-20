@@ -38,8 +38,8 @@ const ComponentProfile = () => {
     urquilla: "",
     email: userEmail,
     userId: userId,
-    admin: false,
-    user: true,
+    admin:"Usuario",
+    user: "activo",
   });
 
   const [inputs, setInputs] = useState({
@@ -53,8 +53,8 @@ const ComponentProfile = () => {
     urquilla: "",
     email: "",
     id: "",
-    admin: false,
-    user: true,
+    admin: "",
+    user: "",
   });
   useEffect(() => {
     setInputs({
@@ -68,8 +68,8 @@ const ComponentProfile = () => {
       urquilla: userByemail.urquilla || "",
       email: userByemail.email || "",
       id: userByemail.id || "",
-      admin: false,
-      user: true,
+      admin: userByemail.admin || "",
+      user: userByemail.user || "",
     });
   }, [userByemail]);
 
@@ -111,8 +111,8 @@ const ComponentProfile = () => {
       urquilla: "",
       email: userEmail,
       userId: userId,
-      admin: false,
-      user: true,
+      admin:"Usuario",
+      user: "activo",
     });
   };
 
@@ -292,7 +292,7 @@ const ComponentProfile = () => {
       ) : (
         <label className={style.labelerror}>Por Favor Inicia Sesion</label>
       )}
-      <ComponentOfferings></ComponentOfferings>
+
     </div>
   ) : (
     <div className={style.container}>

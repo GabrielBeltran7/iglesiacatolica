@@ -84,7 +84,7 @@ useEffect(() => {
         </Link>
         ) :""}
         
-        {userByemail.admin && userEmail? (
+        {userByemail.admin ==="Administrador" && userEmail? (
           <Link to="/homeadmin" onClick={() => { closeMenu()}}>
           Administrador
         </Link>

@@ -34,9 +34,9 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // El usuario está autenticado
+        
       } else {
-        // El usuario no está autenticado
+      
       }
     });
   }, []);
@@ -46,9 +46,6 @@ function App() {
         <div>
           <Navbar />
         </div>
-
-
-
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -61,7 +58,7 @@ function App() {
           <Route path="/passwordrecover" element={<RecoverPassword />} />
           <Route
             path="/homeadmin"
-            element={userByemail.admin ? <HomeAdmin /> : <Home />}
+            element={userByemail.admin ==="Administrador"? <HomeAdmin /> : <Home />}
           />
         </Routes>
         <Footer />
