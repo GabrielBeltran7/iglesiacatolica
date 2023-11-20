@@ -13,7 +13,7 @@ import ReportAllUsers from "../../components/userAdmin/userAdmin";
 import { useDispatch } from "react-redux";
 
 import { useNavigate, useParams } from "react-router-dom";
-import ComponentReportOfferings from "../../components/componentReportOfferings/componentReportOfferings";
+import ComponentReportOfferings from "../../components/componentReportOfferings/ComponentReportOfferings";
 const { Header, Sider, Content } = Layout;
 const HomeAdmin = () => {
   const { username } = useParams();
