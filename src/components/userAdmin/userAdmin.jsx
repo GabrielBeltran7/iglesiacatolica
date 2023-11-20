@@ -276,7 +276,7 @@ const ReportAllUsers = () => {
         >
           <option value="">{record.user}</option>
           <option value="Activo">Activo</option>
-          <option value="inactivo">Inactivo</option>
+          <option value="Inactivo">Inactivo</option>
         </select>
       ),
     },

@@ -1,4 +1,4 @@
-/* Estilos para pantallas grandes (PC) */
+
 .navcontainer {
   display: flex;
   justify-content: space-between;
@@ -56,7 +56,7 @@
   .menuicono {
     display: block;
     font-size: 30px;
-    height: 60px; /* Agrega una altura para que sea clickeable */
+    height: 60px; 
     cursor: pointer;
   }
 
@@ -77,4 +77,4 @@
     display: block;
     margin: 10px;
   }
-}
+} 
