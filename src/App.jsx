@@ -51,8 +51,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route
-            path="/registeroffering"
-            element={userEmail ? <ComponentRegisterOfferings /> : <Login />}
+            path="/registeroffering/:id"
+            element={ <ComponentRegisterOfferings /> }
           />
           <Route path="/profile" element={<ComponentProfile />} />
           <Route path="/passwordrecover" element={<RecoverPassword />} />

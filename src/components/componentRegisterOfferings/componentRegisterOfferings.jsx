@@ -3,43 +3,45 @@ import style from "./componentRegisterOfferings.module.css";
 import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig";
 import { useDispatch, useSelector } from "react-redux";
 
-
 import { postOfferings, getUserProfileByEmail } from "../../Redux/Actions";
 import { onAuthStateChanged } from "firebase/auth";
 import BackButton from "../backButton/backButton";
+import BackButtonAdmin from "../backButtonAdmin/backButtonAdmin";
+import { useParams } from "react-router-dom";
 
 const ComponentRegisterOfferings = () => {
-  const dispatch = useDispatch();
-
-  const userByemail = useSelector((state) => state.UserProfileByEmail);
-
   const dateUser = auth.currentUser;
   const userId = dateUser?.uid ?? "";
   const userEmail = dateUser?.email ?? "";
-  console.log("prueba", userEmail);
+  const dispatch = useDispatch();
+  const { id } = useParams();
+
+  const allUsers = useSelector((state) => state.allUsers);
 
   useEffect(() => {
- 
-      dispatch(getUserProfileByEmail(userEmail));
-  
+    dispatch(getUserProfileByEmail(userEmail));
   }, [userEmail]);
+
+  const userfilter = allUsers.find((user) => user.id === id) || {};
 
   const [formData, setFormData] = useState({});
 
   const [inputs, setInputs] = useState({
-    nombre: userByemail.nombre || "",
-    apellidos: userByemail.apellidos || "",
-    email: userByemail.email || "",
+    userAdmin:userEmail,
+    nombre: userfilter.nombre || "",
+    apellidos: userfilter.apellidos || "",
+    email: userfilter.email || "",
     fechadeofrenda: "",
     cantidadofrendada: "",
   });
   useEffect(() => {
     setInputs({
-      nombre: userByemail.nombre || "",
-      apellidos: userByemail.apellidos || "",
-      email: userByemail.email || "",
+      nombre: userfilter.nombre || "",
+      apellidos: userfilter.apellidos || "",
+      email: userfilter.email || "",
+      userAdmin:userEmail || "",
     });
-  }, [userByemail]);
+  }, [userEmail, id]);
 
   const handleChangeInputs = (event) => {
     const { name, value } = event.target;
@@ -63,9 +65,6 @@ const ComponentRegisterOfferings = () => {
     });
   };
 
-  // const today = new Date();
-  // const formattedDate = today.toISOString().split("T")[0];
-
   useEffect(() => {
     setTimeout(() => {
       setFormData({});
@@ -82,105 +81,103 @@ const ComponentRegisterOfferings = () => {
 
   return (
     <>
-     <div className={style.bodyContainer}>
-        <BackButton />
+      <div className={style.bodyContainer}>
+        <BackButtonAdmin />
       </div>
-    
-    <div className={style.container}>
 
-      <h2 className={style.labelTitle}>Registrar Ofrendas</h2>
-      
-      <form className={style.form} onSubmit={handleSaveSubmit}>
+      <div className={style.container}>
+        <h2 className={style.labelTitle}>Registrar Ofrendas</h2>
 
-        <div className={style.div}>
+        <form className={style.form} onSubmit={handleSaveSubmit}>
+          <div className={style.div}>
+            <div className={style.inputContainer}>
+              <label>
+                {" "}
+                <input
+                  placeholder="Nombre"
+                  type="text"
+                  name="nombre"
+                  value={inputs.nombre}
+                  onChange={handleChangeInputs}
+                  className={style.inputdiv}
+                  readOnly
+                  required
+                />
+              </label>
+            </div>
+            <div className={style.inputContainer}>
+              <label>
+                {" "}
+                <input
+                  placeholder="Apellidos:"
+                  type="text"
+                  name="apellidos"
+                  value={inputs.apellidos}
+                  onChange={handleChangeInputs}
+                  className={style.inputdiv}
+                  readOnly
+                  required
+                />
+              </label>
+            </div>
+          </div>
+
           <div className={style.inputContainer}>
             <label>
               {" "}
               <input
-                placeholder="Nombre"
-                type="text"
-                name="nombre"
-                value={inputs.nombre}
+                placeholder="Correo:"
+                type="email"
+                name="email"
+                value={inputs.email}
                 onChange={handleChangeInputs}
-                className={style.inputdiv}
+                className={style.input}
                 readOnly
                 required
               />
             </label>
           </div>
+
           <div className={style.inputContainer}>
             <label>
               {" "}
+              Fecha de Ofrenda
               <input
-                placeholder="Apellidos:"
-                type="text"
-                name="apellidos"
-                value={inputs.apellidos}
+                placeholder="Fecha de Ofrenda"
+                type="date"
+                name="fechadeofrenda"
+                value={inputs.fechadeofrenda}
                 onChange={handleChangeInputs}
-                className={style.inputdiv}
-                readOnly
+                className={style.input}
                 required
               />
             </label>
           </div>
-        </div>
 
-        <div className={style.inputContainer}>
-          <label>
-            {" "}
-            <input
-              placeholder="Correo:"
-              type="email"
-              name="email"
-              value={inputs.email}
-              onChange={handleChangeInputs}
-              className={style.input}
-              readOnly
-              required
-            />
-          </label>
-        </div>
-
-        <div className={style.inputContainer}>
-          <label>
-            {" "}
-            Fecha de Ofrenda
-            <input
-              placeholder="Fecha de Ofrenda"
-              type="date"
-              name="fechadeofrenda"
-              value={inputs.fechadeofrenda}
-              onChange={handleChangeInputs}
-              className={style.input}
-              required
-            />
-          </label>
-        </div>
-
-        <div className={style.inputContainer}>
-          <label>
-            <input
-              placeholder="$ Cantidad de ofrenda"
-              type="Number"
-              name="cantidadofrendada"
-              value={inputs.cantidadofrendada}
-              onChange={handleChangeInputs}
-              className={style.input}
-              required
-            />
-          </label>
-        </div>
-
-        <div className={style.buttoncontainer}>
           <div className={style.inputContainer}>
-            <button type="submit" className={style.button}>
-              Enviar
-            </button>
+            <label>
+              <input
+                placeholder="$ Cantidad de ofrenda"
+                type="Number"
+                name="cantidadofrendada"
+                value={inputs.cantidadofrendada}
+                onChange={handleChangeInputs}
+                className={style.input}
+                required
+              />
+            </label>
           </div>
-        </div>
-      </form>
-      <div className={style.offering}></div>
-    </div>
+
+          <div className={style.buttoncontainer}>
+            <div className={style.inputContainer}>
+              <button type="submit" className={style.button}>
+                Enviar
+              </button>
+            </div>
+          </div>
+        </form>
+        <div className={style.offering}></div>
+      </div>
     </>
   );
 };

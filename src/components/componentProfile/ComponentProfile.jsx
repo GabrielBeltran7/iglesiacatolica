@@ -449,7 +449,7 @@ const ComponentProfile = () => {
       ) : (
         <label className={style.labelerror}>Por Favor Inicia Sesion</label>
       )}
-      <ComponentOfferings></ComponentOfferings>
+    
     </div>
     </>
   );

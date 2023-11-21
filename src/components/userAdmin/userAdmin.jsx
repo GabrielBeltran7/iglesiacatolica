@@ -198,6 +198,11 @@ const ReportAllUsers = () => {
       dataIndex: "nombre",
       key: "nombre",
       ...getColumnSearchProps("nombre"),
+      render:(text, record)=>(
+        <a href={`/registeroffering/${record.id}`}>
+          {text}
+        </a>
+     )
     },
     {
       title: "Apellido",

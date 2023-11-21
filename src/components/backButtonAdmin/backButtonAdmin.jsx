@@ -1,13 +1,13 @@
 import React from 'react'
 
-import style from "./backButton.module.css"
+import style from "./backButtonAdmin.module.css"
 import { useNavigate } from 'react-router-dom';
 
-const backButton = () => {
+const BackButtonAdmin = () => {
   const navigate = useNavigate();
 
   const navigateBack = () => {
-    navigate(-1); 
+    navigate("/homeadmin"); 
   };
   return (
     <div >
@@ -18,4 +18,4 @@ const backButton = () => {
   )
 }
 
-export default backButton
+export default BackButtonAdmin

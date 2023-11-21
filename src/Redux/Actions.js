@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 export const apdateStateUser = (inputs) => {
 
-  console.log("actions11111111111111111111", inputs)
+ 
   return async (dispatch) => {
     try {
       const userCollection = collection(db, 'user');
@@ -17,8 +17,6 @@ export const apdateStateUser = (inputs) => {
       const updatedData = {
         id: inputs.id,
         user: inputs.user,
-        
-       
       };
 
       // Actualizar el documento con los datos actualizados

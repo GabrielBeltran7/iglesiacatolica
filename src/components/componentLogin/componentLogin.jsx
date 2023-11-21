@@ -49,9 +49,9 @@ const ComponentLogin = () => {
         timerProgressBar: true,
         timer: 1500,
       });
- // Después de iniciar sesión exitosamente, puedes acceder a la información del usuario
+
  const dateUser = auth.currentUser;
- // Puedes utilizar los atributos del usuario, por ejemplo:
+
 
 
 
