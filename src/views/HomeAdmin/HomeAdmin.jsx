@@ -41,10 +41,10 @@ const HomeAdmin = () => {
   const renderSelectedComponent = () => {
     switch (selectedItem) {
       case "1":
-        return <ReportAllUsers />;
+        return < ComponentReportOfferings />;
         
         case "2":
-          return <ComponentReportOfferings />;
+          return < ReportAllUsers/>;
       
       default:
         return null;
@@ -74,12 +74,12 @@ const HomeAdmin = () => {
               {
                 key: "1",
                 icon: <UserAddOutlined />,
-                label: "Usuarios",
+                label: "Ofrendas",
               },
               {
                 key: "2",
                 icon: <DollarOutlined />,
-                label: "Ofrendas",
+                label: "Usuarios",
               },
             ]}
           />

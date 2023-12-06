@@ -211,10 +211,16 @@ const ReportAllUsers = () => {
       ...getColumnSearchProps("apellidos"),
     },
     {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
-      ...getColumnSearchProps("email"),
+      title: "Telefono",
+      dataIndex: "telefono",
+      key: "telefono",
+      ...getColumnSearchProps("telefono"),
+    },
+    {
+      title: "Direccion",
+      dataIndex: "direccion",
+      key: "direccion",
+      ...getColumnSearchProps("direccion"),
     },
     {
       title: "Disponibilidad",
@@ -289,7 +295,8 @@ const ReportAllUsers = () => {
   ];
 
   return (
-    <div>
+    <div >
+    
       <div className={style.botonexcel}>
         <button onClick={exportToExcel}>Exportar a excel 📑</button>
       </div>

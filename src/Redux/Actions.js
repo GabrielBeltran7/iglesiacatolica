@@ -153,7 +153,9 @@ export const updateProfile = (inputs) => {
         disponibilidad: inputs.disponibilidad,
         urquilla: inputs.urquilla,
         email: inputs.email,
-       
+        telefono: inputs.telefono,
+        direccion: inputs.direccion,
+   
       };
 
       // Actualizar el documento con los datos actualizados

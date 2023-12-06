@@ -4,15 +4,24 @@ import style from "./componentHome.module.css";
 import ComponentCarrousel from "../ComponentCarrousel/componentCarrousel";
 
 import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig";
-
+import { getUserProfile, getUserProfileByEmail } from "../../Redux/Actions";
+import { useDispatch } from "react-redux";
 const ComponentHome = () => {
- 
+ const dispatch = useDispatch()
   const navigate = useNavigate();
 
 
   const dateUser = auth.currentUser;
   const userEmail = dateUser?.email ?? "";
 
+  useEffect(() => {
+    dispatch(getUserProfileByEmail(userEmail));
+  }, [userEmail]);
+
+
+  useEffect(() => {
+    dispatch(getUserProfile());
+  }, [userEmail]);
 
   const navigateLogin = () => {
     navigate("/login");

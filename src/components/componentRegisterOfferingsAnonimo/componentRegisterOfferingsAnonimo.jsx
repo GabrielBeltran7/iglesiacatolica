@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import style from "./componentRegisterOfferings.module.css";
+import style from "./componentRegisterOfferingsAnonimo.module.css";
 import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -33,10 +33,10 @@ const navigate = useNavigate()
   };
   const [inputs, setInputs] = useState({
     userAdmin:userEmail,
-    iduser: userfilter.id || "",
-    nombre: userfilter.nombre || "",
-    apellidos: userfilter.apellidos || "",
-    email: userfilter.email || "",
+    iduser: "Anonimo",
+    nombre: "Anonimo",
+    apellidos: "Anonimo",
+    email: "Anonimo",
     fechadeofrenda: obtenerFechaActual(),
     cantidadofrendada: "",
     tipodeofrenda:""
@@ -44,14 +44,14 @@ const navigate = useNavigate()
 
   useEffect(() => {
     setInputs({
-      iduser: userfilter.id || "",
-      nombre: userfilter.nombre || "",
-      apellidos: userfilter.apellidos || "",
-      email: userfilter.email || "",
+      iduser: "Anonimo",
+      nombre: "Anonimo",
+      apellidos: "Anonimo",
+      email: "Anonimo",
       userAdmin:userEmail || "",
       fechadeofrenda: obtenerFechaActual(),
     });
-  }, [userEmail, id]);
+  }, []);
 
   const handleChangeInputs = (event) => {
     const { name, value } = event.target;
@@ -70,9 +70,14 @@ const navigate = useNavigate()
     dispatch(getUserProfileByEmail(userEmail));
 
     setInputs({
-      fechadeofrenda: "",
-      cantidadofrendada: "",
-      tipodeofrenda:""
+      userAdmin:userEmail,
+    iduser: "Anonimo",
+    nombre: "Anonimo",
+    apellidos: "Anonimo",
+    email: "Anonimo",
+    fechadeofrenda: obtenerFechaActual(),
+    cantidadofrendada: "",
+    tipodeofrenda:""
       
     });
     setTimeout(() => {
@@ -166,7 +171,7 @@ const navigate = useNavigate()
                 >
                   <option value="">Seleccione un tipo de ofrenda</option>
                   <option value="Donación">Donación</option>
-                  <option value="Membrecia">Membrecia</option>
+                 
                   <option value="Beso">Beso</option>
                 </select>
               </label>

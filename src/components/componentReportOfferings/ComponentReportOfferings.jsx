@@ -8,12 +8,13 @@ import moment from "moment";
 import Swal from "sweetalert2";
 import { getReportOffering } from "../../Redux/Actions"; // Asegúrate de importar apdateRoluser
 import style from "./ComponentReportOfferings.module.css";
+import { useNavigate } from "react-router-dom";
 
 const ComponentReportOfferings = () => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
-
+const navigate = useNavigate()
   const offering = useSelector((state) => state.allOffering);
 
 
@@ -50,7 +51,9 @@ const ComponentReportOfferings = () => {
     clearFilters();
     setSearchText("");
   };
-
+ const navigateofferingsAnonimo =()=>{
+  navigate("/registerofferinganonimo")
+ }
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
       setSelectedKeys,
@@ -162,9 +165,16 @@ const ComponentReportOfferings = () => {
       title: "Nombre",
       dataIndex: "nombre",
       key: "nombre",
-     
       ...getColumnSearchProps("nombre"),
-    
+      render: (text, record) => (
+        text === "Anonimo" ? (
+          <span>{text}</span>
+        ) : (
+          <a href={`/registeroffering/${record.iduser}`}>
+            {text}
+          </a>
+        )
+      )
     },
     {
       title: "Apellido",
@@ -186,21 +196,36 @@ const ComponentReportOfferings = () => {
       key: "fechadeofrenda",
       ...getColumnSearchProps("fechadeofrenda"),
     },
+    
+    {
+      title: "Tipo de Ofrenda",
+      dataIndex: "tipodeofrenda",
+      key: "tipodeofrenda",
+      ...getColumnSearchProps("tipodeofrenda"),
+    },
     {
       title: "Cantidad Ofrendada",
       dataIndex: "cantidadofrendada",
       key: "cantidadofrendada",
       ...getColumnSearchProps("cantidadofrendada"),
-    },
+      render: (text) => (
+        <span>$ {text}</span>
+      )
+    }
    
   ];
 
   return (
-    <div>
+    <div >
+
+      <div className={style.contenedorbotton}>
+        <div className={style.botonexcel}>
+        <button onClick={navigateofferingsAnonimo}>Ofrerenda anonima</button>
+      </div>
       <div className={style.botonexcel}>
         <button onClick={exportToExcel}>Exportar a excel 📑</button>
       </div>
-
+      </div>
       <Table columns={columns} dataSource={offering} /> 
       <div>
         <div className={style.containerAviso}></div>

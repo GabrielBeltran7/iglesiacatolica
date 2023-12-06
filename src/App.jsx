@@ -14,14 +14,17 @@ import { useEffect } from "react";
 import { getUserProfileByEmail, getUserProfile } from "./Redux/Actions.js";
 import ComponentRegisterOfferings from "./components/componentRegisterOfferings/componentRegisterOfferings.jsx";
 import { onAuthStateChanged } from "firebase/auth";
+import ComponentRegisterOfferingsAnonimo from "./components/componentRegisterOfferingsAnonimo/componentRegisterOfferingsAnonimo.jsx";
 
 
 function App() {
   const dispatch = useDispatch();
   const userByemail = useSelector((state) => state.UserProfileByEmail);
 
+
   const dateUser = auth.currentUser;
   const userEmail = dateUser?.email ?? "";
+  console.log("666666666666666666", userEmail)
   useEffect(() => {
     dispatch(getUserProfileByEmail(userEmail));
   }, [userEmail]);
@@ -53,6 +56,10 @@ function App() {
           <Route
             path="/registeroffering/:id"
             element={ <ComponentRegisterOfferings /> }
+          />
+          <Route
+            path="/registerofferinganonimo/"
+            element={ <ComponentRegisterOfferingsAnonimo /> }
           />
           <Route path="/profile" element={<ComponentProfile />} />
           <Route path="/passwordrecover" element={<RecoverPassword />} />
