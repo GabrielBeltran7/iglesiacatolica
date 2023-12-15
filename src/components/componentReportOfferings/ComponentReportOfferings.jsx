@@ -1,46 +1,87 @@
 import React, { useRef, useState, useEffect } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
-import { Button, Input, Space, Table, Typography, Select } from "antd";
+import { Button, Input, Space, Table, Typography } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import * as XLSX from "xlsx";
 import moment from "moment";
 import Swal from "sweetalert2";
-import { getReportOffering } from "../../Redux/Actions"; // Asegúrate de importar apdateRoluser
+import { getReportOffering, getFilterporFecha } from "../../Redux/Actions";
 import style from "./ComponentReportOfferings.module.css";
 import { useNavigate } from "react-router-dom";
 
 const ComponentReportOfferings = () => {
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
+  const [totalAmount, setTotalAmount] = useState(0);
   const searchInput = useRef(null);
-const navigate = useNavigate()
+  const navigate = useNavigate();
   const offering = useSelector((state) => state.allOffering);
 
+  const [inputfilter, setInputFilter] = useState({
+    fechainicio: "",
+    fechafin: ""
+  });
+const handleSubmit =(event)=>{
+  if(inputfilter.fechainicio ==="" || inputfilter.fechafin===""){
+    Swal.fire({
+      icon: 'error',
+      title: 'Debe seleccionar las fechas',
+      timerProgressBar: true,
+      timer: 2000,
+    });
+    return
+  }if(inputfilter.fechafin<inputfilter.fechainicio){
+    Swal.fire({
+      icon: 'error',
+      title: 'La Fecha final no puede ser menor a la fecha inicio',
+      timerProgressBar: true,
+      timer: 2000,
+    });
+    return
+  }
+  event.preventDefault()
+  
+ dispatch(getFilterporFecha(inputfilter))
+}
+  useEffect(() => {
+    if (offering) {
+      const total = offering.reduce(
+        (acc, item) => acc + parseFloat(item.cantidadofrendada || 0),
+        0
+      );
+      setTotalAmount(total);
+    }
+  }, [offering]);
 
   if (offering) {
     offering.forEach((offering) => {
-      offering.createdAt = moment(offering.createdAt).format("YYYY-MM-DD HH:mm:ss");
-      offering.updatedAt = moment(offering.updatedAt).format("YYYY-MM-DD HH:mm:ss");
+      offering.createdAt = moment(offering.createdAt).format(
+        "YYYY-MM-DD HH:mm:ss"
+      );
+      offering.updatedAt = moment(offering.updatedAt).format(
+        "YYYY-MM-DD HH:mm:ss"
+      );
     });
   }
 
   const dispatch = useDispatch();
 
-
-
   const exportToExcel = () => {
     const ws = XLSX.utils.json_to_sheet(offering);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "offering");
-
-    // Guardar el archivo de Excel
     XLSX.writeFile(wb, "offering.xlsx");
   };
+
   useEffect(() => {
     dispatch(getReportOffering());
-  }, [dispatch]); 
+  }, [dispatch]);
 
+  const HandleUpdate =(event)=>{
+    event.preventDefault()
+    dispatch(getReportOffering());
+  }
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
@@ -51,9 +92,18 @@ const navigate = useNavigate()
     clearFilters();
     setSearchText("");
   };
- const navigateofferingsAnonimo =()=>{
-  navigate("/registerofferinganonimo")
- }
+
+  const navigateOfferingsAnonimo = () => {
+    navigate("/registerofferinganonimo");
+  };
+
+  const handleFilter = (event) => {
+    setInputFilter({
+      ...inputfilter,
+      [event.target.name]: event.target.value
+    });
+  };
+
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({
       setSelectedKeys,
@@ -122,7 +172,7 @@ const navigate = useNavigate()
               close();
             }}
           >
-            close
+            Close
           </Button>
         </Space>
       </div>
@@ -134,16 +184,18 @@ const navigate = useNavigate()
         }}
       />
     ),
-
     onFilter: (value, record) =>
-    (record[dataIndex] && record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())) || false,
-  onFilterDropdownOpenChange: (visible) => {
-    if (visible) {
-      setTimeout(() => searchInput.current?.select(), 100);
-    }
-  },
-  
-
+      (record[dataIndex] &&
+        record[dataIndex]
+          .toString()
+          .toLowerCase()
+          .includes(value.toLowerCase())) ||
+      false,
+    onFilterDropdownOpenChange: (visible) => {
+      if (visible) {
+        setTimeout(() => searchInput.current?.select(), 100);
+      }
+    },
     render: (text) =>
       searchedColumn === dataIndex ? (
         <Highlighter
@@ -166,28 +218,23 @@ const navigate = useNavigate()
       dataIndex: "nombre",
       key: "nombre",
       ...getColumnSearchProps("nombre"),
-      render: (text, record) => (
+      render: (text, record) =>
         text === "Anonimo" ? (
           <span>{text}</span>
         ) : (
-          <a href={`/registeroffering/${record.iduser}`}>
-            {text}
-          </a>
-        )
-      )
+          <a href={`/registeroffering/${record.iduser}`}>{text}</a>
+        ),
     },
     {
       title: "Apellido",
       dataIndex: "apellidos",
       key: "apellidos",
-     
       ...getColumnSearchProps("apellidos"),
     },
     {
       title: "Email",
       dataIndex: "email",
       key: "email",
-     
       ...getColumnSearchProps("email"),
     },
     {
@@ -196,7 +243,6 @@ const navigate = useNavigate()
       key: "fechadeofrenda",
       ...getColumnSearchProps("fechadeofrenda"),
     },
-    
     {
       title: "Tipo de Ofrenda",
       dataIndex: "tipodeofrenda",
@@ -208,25 +254,54 @@ const navigate = useNavigate()
       dataIndex: "cantidadofrendada",
       key: "cantidadofrendada",
       ...getColumnSearchProps("cantidadofrendada"),
-      render: (text) => (
-        <span>$ {text}</span>
-      )
-    }
-   
+      render: (text) => <span>$ {text}</span>,
+    },
   ];
 
   return (
-    <div >
-
+    <div>
       <div className={style.contenedorbotton}>
+         <div className={style.botonexcel}>
+          <label >Desde</label>
+          <input
+            type="date"
+            onChange={handleFilter}
+            value={inputfilter.fechainicio}
+            name="fechainicio"
+            required
+          />
+        </div>
         <div className={style.botonexcel}>
-        <button onClick={navigateofferingsAnonimo}>Ofrerenda anonima</button>
+        <label >Hasta</label>
+          <input
+            type="date"
+            onChange={handleFilter}
+            value={inputfilter.fechafin}
+            name="fechafin"
+            required
+          />
+        </div>
+        
+        <div className={style.botonexcel}>
+          <button onClick={handleSubmit}>Buscar</button>
+        </div>
+        <div className={style.botonexcel}>
+          <button onClick={HandleUpdate}>Actualizar</button>
+        </div>
+        <div className={style.botonexcel}>
+          <button onClick={navigateOfferingsAnonimo}>Ofrenda anónima</button>
+        </div>
+        <div className={style.botonexcel}>
+          <button onClick={exportToExcel}>Exportar a Excel 📑</button>
+        </div>
       </div>
-      <div className={style.botonexcel}>
-        <button onClick={exportToExcel}>Exportar a excel 📑</button>
+
+      <Table columns={columns} dataSource={offering} />
+      <div>
+        <Typography.Title level={4}>
+          Total Ofrendas: $ {totalAmount.toFixed(2)}
+        </Typography.Title>
       </div>
-      </div>
-      <Table columns={columns} dataSource={offering} /> 
       <div>
         <div className={style.containerAviso}></div>
       </div>
