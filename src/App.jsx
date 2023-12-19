@@ -15,7 +15,7 @@ import { getUserProfileByEmail, getUserProfile } from "./Redux/Actions.js";
 import ComponentRegisterOfferings from "./components/componentRegisterOfferings/componentRegisterOfferings.jsx";
 import { onAuthStateChanged } from "firebase/auth";
 import ComponentRegisterOfferingsAnonimo from "./components/componentRegisterOfferingsAnonimo/componentRegisterOfferingsAnonimo.jsx";
-
+import ComponentRegisterSocio from "./components/componentregisterProfile/ComponentRegisterSocio.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ function App() {
 
   const dateUser = auth.currentUser;
   const userEmail = dateUser?.email ?? "";
-  console.log("666666666666666666", userEmail)
+
   useEffect(() => {
     dispatch(getUserProfileByEmail(userEmail));
   }, [userEmail]);
@@ -51,8 +51,9 @@ function App() {
         </div>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/registersocio" element={<ComponentRegisterSocio />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/register" element={userEmail && userByemail.admin ==="Administrador"? <Register />: <Home />} />
           <Route
             path="/registeroffering/:id"
             element={ <ComponentRegisterOfferings /> }
@@ -68,7 +69,7 @@ function App() {
             element={userByemail.admin ==="Administrador"? <HomeAdmin /> : <Home />}
           />
         </Routes>
-        <Footer />
+       <Footer /> 
       </>
     </Router>
   );

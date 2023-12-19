@@ -261,28 +261,71 @@ export const getUserProfileByEmail = (email) => {
 
 
 export const postProfile = (user) => {
- 
   return async (dispatch) => {
     try {
       const userCollection = collection(db, 'user');
+      
+      // Verificar si el correo electrónico ya está registrado
+      const emailQuery = query(userCollection, where('email', '==', user.email));
+      const emailSnapshot = await getDocs(emailQuery);
+
+      if (!emailSnapshot.empty) {
+        // El correo electrónico ya está registrado
+        Swal.fire({
+          icon: 'error',
+          title: 'Este correo electrónico ya está registrado',
+          timerProgressBar: true,
+          timer: 3500,
+        });
+        return; // No continuar con el registro
+      }
+
+      // Si el correo electrónico no está registrado, proceder con el registro
       const newDocRef = await addDoc(userCollection, user);
       Swal.fire({
         icon: 'success',
-        title: 'datos registrados con exito',
+        title: 'Datos registrados con éxito',
         timerProgressBar: true,
         timer: 2000,
       });
-      
+
     } catch (error) {
+      console.error(error);
       Swal.fire({
         icon: 'error',
-        title: 'Error al registrar Los datos',
+        title: 'Error al registrar los datos',
         timerProgressBar: true,
         timer: 3500,
       });
     }
   };
 };
+
+
+// export const postProfile = (user) => {
+// const email = user.email
+//   return async (dispatch) => {
+//     try {
+//       const userCollection = collection(db, 'user');
+//       const newDocRef = await addDoc(userCollection, user);
+//       Swal.fire({
+//         icon: 'success',
+//         title: 'datos registrados con exito',
+//         timerProgressBar: true,
+//         timer: 2000,
+//       });
+      
+//     } catch (error) {
+//       Swal.fire({
+//         icon: 'error',
+//         title: 'Error al registrar Los datos',
+//         timerProgressBar: true,
+//         timer: 3500,
+//       });
+//     }
+//   };
+// };
+
 
 export const getUserProfile = () => {
   return async (dispatch) => {

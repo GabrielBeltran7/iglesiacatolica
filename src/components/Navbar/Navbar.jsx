@@ -80,7 +80,7 @@ useEffect(() => {
             Cerrar Sesión
           </Link>
         )}
-         {!userEmail? (
+         {userEmail && userByemail.admin ==="Administrador"? (
           <Link to="/register" onClick={() => { closeMenu()}}>
           Regístrate
         </Link>

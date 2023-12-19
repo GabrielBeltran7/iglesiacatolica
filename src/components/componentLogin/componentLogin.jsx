@@ -7,7 +7,6 @@ import { auth } from "../../../api/firebase/FirebaseConfig/FirebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import Swal from "sweetalert2";
 
-
 const ComponentLogin = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -116,13 +115,13 @@ const ComponentLogin = () => {
             <FaSignInAlt /> Iniciar Sesión
           </button>
 
-          <button
+          {/* <button
             type="button"
             onClick={navigateRegister}
             className={styles.button}
           >
             <FaUserPlus /> Crear Cuenta
-          </button>
+          </button> */}
 
           <div className={styles.div} onClick={navigateRecoverPassword}>
             <label className={styles.contra}>¿Olvidaste tu Contraseña? </label>

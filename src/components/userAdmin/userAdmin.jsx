@@ -8,6 +8,7 @@ import moment from "moment";
 
 import { getUserProfile, apdateRoluser, apdateStateUser } from "../../Redux/Actions"; 
 import style from "./userAdmin.module.css";
+import { useNavigate } from "react-router-dom";
 
 const ReportAllUsers = () => {
   const [searchText, setSearchText] = useState("");
@@ -16,7 +17,7 @@ const ReportAllUsers = () => {
   const [permissions, setPermissions] = useState({
     
   }); 
-  
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     
   }); 
@@ -293,13 +294,22 @@ const ReportAllUsers = () => {
     },
     
   ];
-
+  const navigateHomeAdmin = () => {
+    navigate("/registersocio");
+  };
   return (
     <div >
-    
+      <div className={style.containerboton}>
+
+      <div className={style.botonexcel}>
+        <button onClick={navigateHomeAdmin}>Registrar Usuarios</button>
+      </div>
       <div className={style.botonexcel}>
         <button onClick={exportToExcel}>Exportar a excel 📑</button>
       </div>
+
+      </div>
+     
 
       <Table columns={columns} dataSource={allUsers} />
       <div>

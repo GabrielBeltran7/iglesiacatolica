@@ -36,9 +36,9 @@ const ComponentHome = () => {
       <button className={style.button} onClick={navigateLogin}>
         Iniciar Sesión
       </button>
-      <button className={style.button} onClick={navigateRegister}>
+      {/* <button className={style.button} onClick={navigateRegister}>
         Regístrarse
-      </button>
+      </button> */}
        
       </div>:<label className={style.label}>Bienvenidos</label>
       }
